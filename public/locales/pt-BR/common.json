@@ -1,0 +1,60 @@
+{
+  "navigation": {
+    "home": "Início",
+    "services": "Serviços",
+    "portfolio": "Portfólio",
+    "contact": "Contato",
+    "requestQuote": "Solicitar Orçamento"
+  },
+  "heroSection": {
+    "availability": "Disponível para novos projetos",
+    "mainTitle": {
+      "first": "TRANSFORMAMOS",
+      "second": "IDEIAS EM RESULTADOS"
+    },
+    "subtitle": "Potencializamos negócios ambiciosos com soluções digitais inovadoras",
+    "metrics": {
+      "satisfaction": "Satisfação",
+      "projects": "Projetos",
+      "support": "Suporte"
+    },
+    "cta": {
+      "primary": "Impulsione seu negócio",
+      "secondary": "Ver casos de sucesso"
+    },
+    "techTitle": "TECNOLOGIAS QUE DOMINAMOS",
+    "scrollHint": "Role para descobrir"
+  },
+  "contactSection": {
+    "availability": "Estamos disponíveis • Resposta em até 24h",
+    "title": {
+      "first": "ENTRE EM",
+      "second": "CONTATO"
+    },
+    "description": "Vamos transformar suas ideias em realidade. Conte-nos sobre o seu projeto e descubra como podemos impulsionar seus resultados!",
+    "form": {
+      "title": "Envie sua mensagem",
+      "name": "Seu nome",
+      "email": "Seu email",
+      "message": "Sua mensagem",
+      "submit": "Enviar Mensagem",
+      "privacy": "Seu contato é confidencial • Responderemos em até 24h"
+    },
+    "info": {
+      "title": "Informações",
+      "email": "Email",
+      "phone": "Telefone",
+      "social": "Siga-nos"
+    },
+    "metrics": {
+      "support": "Suporte",
+      "security": "Segurança",
+      "projects": "Projetos"
+    },
+    "benefits": [
+      "Resposta rápida", 
+      "Orçamento detalhado", 
+      "Consultoria gratuita"
+    ]
+  }
+}

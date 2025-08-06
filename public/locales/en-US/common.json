@@ -1,0 +1,60 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact",
+    "requestQuote": "Request Quote"
+  },
+  "heroSection": {
+    "availability": "Available for new projects",
+    "mainTitle": {
+      "first": "TRANSFORMING",
+      "second": "IDEAS INTO RESULTS"
+    },
+    "subtitle": "We empower ambitious businesses with innovative digital solutions",
+    "metrics": {
+      "satisfaction": "Satisfaction",
+      "projects": "Projects",
+      "support": "Support"
+    },
+    "cta": {
+      "primary": "Boost your business",
+      "secondary": "View success cases"
+    },
+    "techTitle": "TECHNOLOGIES WE MASTER",
+    "scrollHint": "Scroll to discover"
+  },
+  "contactSection": {
+    "availability": "We are available • Response within 24h",
+    "title": {
+      "first": "GET IN",
+      "second": "TOUCH"
+    },
+    "description": "Let's transform your ideas into reality. Tell us about your project and discover how we can boost your results!",
+    "form": {
+      "title": "Send us a message",
+      "name": "Your name",
+      "email": "Your email",
+      "message": "Your message",
+      "submit": "Send Message",
+      "privacy": "Your contact is confidential • We'll respond within 24h"
+    },
+    "info": {
+      "title": "Information",
+      "email": "Email",
+      "phone": "Phone",
+      "social": "Follow us"
+    },
+    "metrics": {
+      "support": "Support",
+      "security": "Security",
+      "projects": "Projects"
+    },
+    "benefits": [
+      "Fast response", 
+      "Detailed quote", 
+      "Free consultation"
+    ]
+  }
+}

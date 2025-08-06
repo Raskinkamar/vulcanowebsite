@@ -1,0 +1,233 @@
+"use cliOAOAOOOOBOBOent";
+OB
+import { useState, useRef, useEffect, Suspense } from "react";
+imOBport { motion, uOOOOOBOBOOBOBseScroll, useTransform, AnimatePresence } from "framer-motion";
+impoOAOArt dynamic from 'next/dynamic';
+import GreekGodIcon from "./components/GreekGodIcons";
+import LoadingScreen from "./components/LoadingScreen";
+import Footer from "./components/BOBFooter";
+OB
+//n
+ Lazy loading para componentes pesados
+const HeroSection = dynamic(() => import('./components/HeroSection'), { 
+  loading: () => <div className="min-h-screen bg-black flex items-center justify-center">Carregando...</div> 
+});
+const Services = dynamic(() => import('./components/Services'), { ssr: true });
+const Portfolio = dynamic(() => import('./components/Portfolio'), { ssr: true });
+const Testimonials = dynamic(() => import('./components/Testimonials'), { ssr: true });
+const Contact = dynamic(() => import('./components/Contact'), { ssr: true });
+const FloatingCTA = dynamic(() => import('./components/FloatingCTA'), { ssr: true });
+const GreekStatues = dynamic(() => import('./components/GreekStatues'), { ssr: true });
+
+// Componente de troca de idioma com lazy loading
+const dynamic = {
+  ...dynamic,
+  LanguageSwitcher: dynamic(() => import('./components/LanguageSwitcher'))
+};
+
+// ✅ Definição dos projetos e depoimentos
+const projects = [
+  {
+    title: "Projeto One",
+    description: "Descrição do primeiro projeto.",
+    tech: ["React", "Next.js"],
+    gradient: "from-purple-700 to-purple-900",
+    category: "Web",
+    examples: [
+      {
+        title: "Exemplo Um",
+        description: "Descrição do exemplo.",
+        imageUrl: "/images/planet2.png",
+      },
+    ],
+  },
+];
+
+const testimonialsData = [
+  {
+    name: "João Silva",
+    role: "CEO",
+    message: "Incrível trabalho, revolucionou nossa infraestrutura!",
+    avatar: undefined,
+  },
+  {
+    name: "Maria Souza",
+    role: "CTO",
+    message: "Soluções escaláveis e design impecável.",
+    avatar: undefined,
+  },
+];
+
+export default function Home() {
+  // Estado para controlar a tela de loading
+  const [loading, setLoading] = useState(true);
+  
+  // Referências para as seções para usar com a navegação
+  const heroRef = useRef<HTMLDivElement>(null);
+  const servicesRef = useRef<HTMLDivElement>(null);
+  const portfolioRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
+  
+  // Função para navegação suave (apenas para os botões do menu)
+  const scrollToSection = (ref: React.RefObject<HTMLDivElement>) => {
+    if (ref.current) {
+      window.scrollTo({
+        top: ref.current.offsetTop - 80, // Compensar a altura do header
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const { scrollYProgress } = useScroll();
+  const backgroundOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.3]);
+
+  // Função para corrigir o scroll no Safari e outros navegadores
+  useEffect(() => {
+    document.body.style.overflow = "auto";
+    document.body.style.height = "auto";
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.height = "";
+    };
+  }, []);
+
+  return (
+    <div className="relative bg-black text-white overflow-auto">
+      {/* Tela de carregamento */}
+      <AnimatePresence>
+        {loading && <LoadingScreen finishLoading={() => setLoading(false)} />}
+      </AnimatePresence>
+      {/* Removido o componente GreekStatues fixo na tela */}
+      
+      {/* Navbar fixo com visual premium e ícone de Vulcano */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex justify-center">
+        <motion.nav 
+          className="flex items-center gap-4 sm:gap-6 md:gap-10 bg-black/50 backdrop-blur-md py-2 px-6 mt-4 rounded-full border border-gray-800"
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          {/* Logo Vulcano */}
+          <div className="flex items-center mr-1">
+            <GreekGodIcon god="vulcano" size={28} color="#ff3d3d" />
+            <span className="text-red-500 font-bold ml-2 hidden sm:inline-block">Vulcano</span>
+          </div>
+          
+          {/* Import dinâmico para o Language Switcher */}
+          <Suspense fallback={null}>
+            {typeof window !== 'undefined' && <dynamic.LanguageSwitcher />}
+          </Suspense>
+          
+          {[
+            { label: "Início", ref: heroRef },
+            { label: "Serviços", ref: servicesRef },
+            { label: "Portfólio", ref: portfolioRef },
+            { label: "Contato", ref: contactRef }
+          ].map((item, index) => (
+            <motion.button 
+              key={item.label}
+              onClick={() => scrollToSection(item.ref)}
+              className="relative text-xs sm:text-sm text-gray-300 hover:text-white transition-colors font-medium px-2 py-1"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <span>{item.label}</span>
+              <motion.div
+                className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-red-700"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.button>
+          ))}
+          
+          {/* Botão de destaque */}
+          <motion.button
+            className="bg-gradient-to-r from-red-600 to-red-800 text-xs sm:text-sm text-white font-medium px-4 py-1.5 rounded-full flex items-center gap-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection(contactRef)}
+          >
+            <span className="hidden sm:inline-block">Solicitar</span> Orçamento
+          </motion.button>
+        </motion.nav>
+      </header>
+
+            {/* Conteúdo principal com rolagem vertical livre */}
+      <main>
+        {/* Hero Section */}
+        <div id="hero" ref={heroRef}>
+          <HeroSection onViewPortfolio={() => scrollToSection(servicesRef)} />
+        </div>
+        
+        {/* Services Section */}
+        <div id="services" ref={servicesRef}>
+          <Services />
+        </div>
+        
+        {/* Portfolio Section */}
+        <div id="portfolio" ref={portfolioRef}>
+          <Portfolio projects={projects} />
+        </div>
+        
+        {/* Testimonials Section */}
+        <div id="testimonials">
+          <Testimonials testimonials={testimonialsData} />
+        </div>
+        
+        {/* Contact Section */}
+        <div id="contact" ref={contactRef}>
+          <Contact />
+        </div>
+        
+        {/* Footer */}
+        <Footer />
+      </main>
+
+      {/* Ícones de deuses gregos flutuantes */}
+      <div className="fixed z-30 pointer-events-none">
+        {/* Ícone de Zeus na lateral direita */}
+        <motion.div 
+          className="fixed top-1/3 -right-4"
+          animate={{ x: [0, -10, 0], opacity: [0.2, 0.4, 0.2] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <GreekGodIcon god="zeus" size={120} color="rgba(106, 137, 204, 0.3)" />
+        </motion.div>
+        
+        {/* Ícone de Poseidon no canto inferior */}
+        <motion.div 
+          className="fixed bottom-10 -left-5"
+          animate={{ y: [0, -15, 0], opacity: [0.15, 0.3, 0.15] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        >
+          <GreekGodIcon god="poseidon" size={100} color="rgba(79, 195, 247, 0.3)" />
+        </motion.div>
+        
+        {/* Ícone de Atena mais sutil */}
+        <motion.div 
+          className="fixed top-[20%] left-[15%] hidden md:block"
+          animate={{ rotate: [0, 10, 0, -10, 0], opacity: [0.1, 0.2, 0.1] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+        >
+          <GreekGodIcon god="athena" size={80} color="rgba(156, 39, 176, 0.25)" />
+        </motion.div>
+      </div>
+
+      {/* Indicador de rolagem com estilo de fogo/forja */}
+      <motion.div 
+        className="fixed bottom-4 right-4 z-40 w-12 h-12 bg-black/60 backdrop-blur-md rounded-full border border-red-800/50 flex items-center justify-center overflow-hidden"
+        style={{ opacity: backgroundOpacity }}
+      >
+        <GreekGodIcon god="vulcano" size={24} color="#ff3d3d" animated={false} className="absolute z-10" />
+        <motion.div 
+          className="h-full w-full bg-gradient-to-t from-red-600 to-yellow-400 origin-bottom absolute opacity-60"
+          style={{ scaleY: scrollYProgress }}
+        />
+      </motion.div>
+      
+      {/* CTA Flutuante */}
+      <FloatingCTA />
+    </div>
+  );
+}

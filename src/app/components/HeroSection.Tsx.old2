@@ -1,0 +1,286 @@
+"use client"
+
+import React, { useState, useEffect } from "react"
+import { motion } from "framer-motion"
+import { ChevronDown, ArrowRight, Megaphone, BarChart, Search, Mail, PenTool, Globe } from "lucide-react"
+import Link from "next/link"
+
+interface HeroSectionProps {
+  onViewPortfolio: () => void
+}
+
+const MENU_ITEMS = [
+  {
+    name: "Serviços",
+    submenu: [
+      { name: "Marketing Digital", href: "/marketing-digital" },
+      { name: "Branding", href: "/branding" },
+      { name: "SEO", href: "/seo" },
+    ],
+  },
+]
+
+const SERVICES = [
+  { name: "Marketing de Conteúdo", icon: <Megaphone />, color: "#4ade80" },
+  { name: "Análise de Dados", icon: <BarChart />, color: "#22c55e" },
+  { name: "SEO", icon: <Search />, color: "#16a34a" },
+  { name: "Email Marketing", icon: <Mail />, color: "#15803d" },
+  { name: "Design Gráfico", icon: <PenTool />, color: "#86efac" },
+  { name: "Marketing Internacional", icon: <Globe />, color: "#4ade80" },
+]
+
+const HeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) => {
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY })
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove)
+    }
+  }, [])
+
+  return (
+    <section className="relative flex flex-col items-center justify-center min-h-screen w-full text-green-100 overflow-hidden bg-gray-900">
+      {/* SVG Background Animation */}
+      <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+          <rect width="50" height="50" fill="none" stroke="#22c55e20" strokeWidth="0.5" />
+        </pattern>
+        {[...Array(20)].map((_, i) => (
+          <motion.circle
+            key={i}
+            cx={Math.random() * 100 + "%"}
+            cy={Math.random() * 100 + "%"}
+            r="1"
+            fill="#4ade80"
+            filter="url(#glow)"
+            animate={{
+              x: [0, Math.random() * 50 - 25],
+              y: [0, Math.random() * 50 - 25],
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2,
+              repeat: Number.POSITIVE_INFINITY,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
+
+        {/* Animated Rocket SVG */}
+        <motion.g
+          initial={{ y: 100, opacity: 0 }}
+          animate={{
+            y: [0, -20, 0],
+            opacity: 1,
+          }}
+          transition={{
+            y: {
+              duration: 4,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            },
+            opacity: { duration: 1 },
+          }}
+        >
+          <path
+            d="M32 5.16c-13.07.1-24.32 3.35-24.92 8.98-.1.89.57 1.94 1.76 2.98 1.95-3.68 11.28-6.46 22.48-6.55 11.2-.09 20.61 2.53 22.67 6.17 1.08-.97 1.7-1.95 1.62-2.82-.6-5.63-11.93-8.68-25-8.76zm.32 7.24c-11.05.09-20.01 2.78-20.01 6.03 0 3.25 8.96 5.81 20.01 5.72 11.05-.09 20.01-2.78 20.01-6.03 0-3.25-8.96-5.81-20.01-5.72z"
+            fill="#22c55e"
+          />
+          <motion.path
+            d="M32.32 12.4c-11.05.09-20.01 2.78-20.01 6.03 0 3.25 8.96 5.81 20.01 5.72 11.05-.09 20.01-2.78 20.01-6.03 0-3.25-8.96-5.81-20.01-5.72z"
+            fill="#4ade80"
+            animate={{
+              scale: [1, 1.1, 1],
+              y: [0, -5, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.path
+            d="M32.32 12.4c-11.05.09-20.01 2.78-20.01 6.03v8.38c0 3.25 8.96 5.81 20.01 5.72 11.05-.09 20.01-2.78 20.01-6.03v-8.38c0 3.25-8.96 5.81-20.01 5.72-11.05.09-20.01-2.47-20.01-5.72 0-3.25 8.96-5.81 20.01-5.72z"
+            fill="#22c55e"
+            animate={{
+              y: [0, -3, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Number.POSITIVE_INFINITY,
+              ease: "easeInOut",
+              delay: 0.5,
+            }}
+          />
+        </motion.g>
+      </svg>
+
+      {/* Interactive Cursor Effect */}
+      <motion.div
+        className="fixed w-20 h-20 rounded-full bg-green-500 mix-blend-screen filter blur-xl pointer-events-none z-50"
+        animate={{
+          x: mousePosition.x - 40,
+          y: mousePosition.y - 40,
+        }}
+      />
+
+      {/* Navbar */}
+      <motion.nav
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        className="absolute top-0 w-full flex justify-between items-center px-8 py-6 z-40"
+      >
+        <div className="text-2xl font-bold text-green-400">Impulsione</div>
+        <div className="flex items-center gap-6">
+          {MENU_ITEMS.map((item, index) => (
+            <div key={item.name} className="relative">
+              <button
+                onClick={() => setOpenDropdown(openDropdown === index ? null : index)}
+                className="flex items-center space-x-2 px-4 py-2 bg-gray-800 rounded-md border border-green-700 text-green-100 hover:border-green-500 transition-all"
+              >
+                <span>{item.name}</span>
+                <ChevronDown className={`w-4 h-4 transition-transform ${openDropdown === index ? "rotate-180" : ""}`} />
+              </button>
+              {openDropdown === index && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute mt-2 w-48 rounded-xl bg-gray-800 border border-green-500/20 backdrop-blur-xl shadow-lg z-50"
+                >
+                  <div className="p-2">
+                    {item.submenu.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        href={subItem.href}
+                        className="flex items-center space-x-2 px-3 py-2 rounded-lg text-sm text-green-100 hover:bg-green-500/10 transition-all group"
+                      >
+                        <span>{subItem.name}</span>
+                        <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                      </Link>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </div>
+          ))}
+        </div>
+      </motion.nav>
+
+      {/* Hero Content */}
+      <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
+        <motion.h1
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-6xl sm:text-7xl font-extrabold mb-6 leading-tight"
+        >
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-green-600">Impulsione</span>{" "}
+          <br />
+          <span className="relative">
+            seu negócio
+            <motion.svg
+              className="absolute -top-1 -right-1 w-full h-full"
+              viewBox="0 0 300 50"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <motion.path
+                d="M10 40 Q 150 10 290 40"
+                fill="none"
+                stroke="#4ade80"
+                strokeWidth="2"
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
+                transition={{ duration: 2, ease: "easeInOut" }}
+              />
+            </motion.svg>
+          </span>
+        </motion.h1>
+
+        <motion.p
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="text-green-200 text-lg sm:text-xl max-w-2xl mx-auto mb-12"
+        >
+          Transforme sua presença digital com estratégias inovadoras de marketing. Alcance, engaje e converta seu
+          público-alvo com a Impulsione.
+        </motion.p>
+
+        {/* Animated Services */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-6 mb-12"
+          initial="hidden"
+          animate="visible"
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.1,
+              },
+            },
+          }}
+        >
+          {SERVICES.map((service, index) => (
+            <motion.div
+              key={service.name}
+              className="relative group"
+              variants={{
+                hidden: { y: 20, opacity: 0 },
+                visible: { y: 0, opacity: 1 },
+              }}
+              whileHover={{ scale: 1.1 }}
+            >
+              <div className="flex items-center space-x-2 px-4 py-2 rounded-lg border border-green-700 bg-gray-800 transition-all cursor-pointer">
+                {React.cloneElement(service.icon as React.ReactElement, {
+                  className: "w-6 h-6",
+                  style: { color: service.color },
+                })}
+                <span className="text-sm font-medium">{service.name}</span>
+              </div>
+              <motion.div
+                className="absolute -inset-0.5 bg-gradient-to-r from-green-600 to-green-400 rounded-lg blur opacity-0 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt"
+                initial={false}
+                animate={{ opacity: [0, 0.3, 0] }}
+                transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA Button */}
+        <motion.button
+          onClick={onViewPortfolio}
+          className="relative px-8 py-3 bg-gradient-to-r from-green-500 to-green-600 rounded-full text-gray-900 font-semibold text-lg transition-all duration-300 shadow-lg overflow-hidden group"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <span className="relative z-10">Ver Portfólio</span>
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-300"
+            initial={{ x: "100%" }}
+            whileHover={{ x: 0 }}
+            transition={{ duration: 0.3 }}
+          />
+        </motion.button>
+      </div>
+    </section>
+  )
+}
+
+export default HeroSection
+
