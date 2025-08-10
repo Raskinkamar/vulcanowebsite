@@ -13,7 +13,7 @@
       "first": "Rafael Rocha",
       "second": "Desarrollador Web"
     },
-    "subtitle": "Desarrollador Web Fullstack creando experiencias digitales únicas e impresionantes",
+    "subtitle": "Fullstack desarrollando productos rápidos, accesibles y orientados a conversión",
     "metrics": {
       "satisfaction": "Satisfacción",
       "projects": "Proyectos",
@@ -29,11 +29,11 @@
     "portfolioProjects": "Proyectos en Portafolio"
   },
   "servicesSection": {
-    "title": "Soluciones Que Generan Resultados",
-    "subtitle": "Convertimos inversión en crecimiento real y medible. Cada servicio está desarrollado con enfoque en ROI comprobado.",
+    "title": "Soluciones que entregan",
+    "subtitle": "Proyectos guiados por métricas: performance, SEO técnico y UX que convierte. Sin humo: trabajo de calidad.",
     "cta": {
-      "title": "Transforma tu inversión en resultados medibles",
-      "subtitle": "Consultoría inicial gratuita • Presupuesto en 24 horas • Garantía de satisfacción"
+      "title": "¿Listo para avanzar tu proyecto?",
+      "subtitle": "Consultoría inicial gratuita • Presupuesto en 24h"
     },
     "services": [
       {
@@ -64,7 +64,7 @@
   },
   "portfolioSection": {
     "title": "Proyectos Recientes",
-    "subtitle": "Mira algunos de los trabajos que he desarrollado para clientes satisfechos",
+    "subtitle": "Casos con foco en claridad, performance y resultados",
     "featured": "DESTACADO",
     "metrics": {
       "performance": "Rendimiento",
@@ -94,9 +94,9 @@
     "subtitle": "Testimonios de clientes que han transformado sus ideas en realidad"
   },
   "contactSection": {
-    "title": "CONTACTA CON NOSOTROS",
-    "subtitle": "Vamos a transformar tus ideas en realidad. Cuéntanos sobre tu proyecto y descubre cómo podemos impulsar tus resultados!",
-    "badge": "Estamos disponibles • Respuesta en 24h",
+    "title": "Habla con Vulcano",
+    "subtitle": "Cuéntanos tus objetivos y recibe un diagnóstico inicial con próximos pasos claros.",
+    "badge": "Respuesta en 24h • Atención humana",
     "form": {
       "name": "Tu nombre",
       "email": "Tu email",

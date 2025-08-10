@@ -13,7 +13,7 @@
       "first": "Rafael Rocha",
       "second": "Web Developer"
     },
-    "subtitle": "Fullstack Web Developer creating unique and impressive digital experiences",
+    "subtitle": "Fullstack developer building fast, accessible and conversion-oriented products",
     "metrics": {
       "satisfaction": "Satisfaction",
       "projects": "Projects",
@@ -29,11 +29,11 @@
     "portfolioProjects": "Portfolio Projects"
   },
   "servicesSection": {
-    "title": "Solutions That Generate Results",
-    "subtitle": "We convert investment into real and measurable growth. Each service is developed with a focus on proven ROI.",
+    "title": "Solutions that deliver",
+    "subtitle": "Metric-driven projects: performance, technical SEO and UX that converts. No hype—just quality work.",
     "cta": {
-      "title": "Transform your investment into measurable results",
-      "subtitle": "Free initial consultation • Quote within 24 hours • Satisfaction guarantee"
+      "title": "Ready to move your project forward?",
+      "subtitle": "Free initial consultation • Quote within 24h"
     },
     "services": [
       {
@@ -64,7 +64,7 @@
   },
   "portfolioSection": {
     "title": "Recent Projects",
-    "subtitle": "Check out some of the work I've developed for satisfied clients",
+    "subtitle": "A selection of cases focused on clarity, performance and results",
     "featured": "FEATURED",
     "metrics": {
       "performance": "Performance",
@@ -94,9 +94,9 @@
     "subtitle": "Testimonials from clients who have transformed their ideas into reality"
   },
   "contactSection": {
-    "title": "GET IN TOUCH",
-    "subtitle": "Let's transform your ideas into reality. Tell us about your project and discover how we can boost your results!",
-    "badge": "We're available • Response within 24h",
+    "title": "Talk to Vulcano",
+    "subtitle": "Share your goals and get an initial diagnosis with clear next steps.",
+    "badge": "Response within 24h • Human-first service",
     "form": {
       "name": "Your name",
       "email": "Your email",

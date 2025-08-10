@@ -122,7 +122,8 @@ const ServiceCard: React.FC<{
   index: number
   isActive: boolean
   onToggle: () => void
-}> = ({ service, index, isActive, onToggle }) => {
+  requestQuoteLabel: string
+}> = ({ service, index, isActive, onToggle, requestQuoteLabel }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -157,7 +158,7 @@ const ServiceCard: React.FC<{
           <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-3" aria-label="Métricas do serviço">
             <div className="bg-black/40 border border-white/10 rounded-lg p-3 text-center">
               <div className="text-lg font-bold text-red-500">{service.stats.primary}</div>
               <div className="text-xs text-gray-500">{service.stats.label}</div>
@@ -178,7 +179,7 @@ const ServiceCard: React.FC<{
                 className="overflow-hidden"
               >
                 <div className="border-t border-white/10 pt-4 space-y-3">
-                  <h4 className="text-sm font-bold text-red-400 uppercase">Recursos Inclusos</h4>
+                  <h4 className="text-sm font-bold text-red-400 uppercase">Recursos inclusos</h4>
                   <ul className="space-y-2">
                     {service.features.map((feature, i) => (
                       <motion.li
@@ -194,8 +195,8 @@ const ServiceCard: React.FC<{
                     ))}
                   </ul>
 
-                  <button className="w-full mt-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-white font-medium text-sm transition-colors">
-                    {t('nav.requestQuote')}
+                  <button className="w-full mt-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-white font-medium text-sm transition-colors" aria-label="Solicitar orçamento deste serviço">
+                    {requestQuoteLabel}
                   </button>
                 </div>
               </motion.div>
@@ -243,9 +244,8 @@ const AdvancedServices: React.FC = () => {
           </div>
 
           <h2 className="text-5xl md:text-6xl font-black mb-6">
-            <span className="text-white">{t('servicesSection.title').split(' ')[0]}</span>
-            <br />
-            <span className="text-red-500">{t('servicesSection.title').split(' ')[1]}</span>
+            <span className="text-white">{t('servicesSection.title').split(' ')[0]}</span>{' '}
+            <span className="text-red-500">{t('servicesSection.title').split(' ').slice(1).join(' ')}</span>
           </h2>
 
           <p className="text-xl text-white/70 max-w-4xl mx-auto">
@@ -262,6 +262,7 @@ const AdvancedServices: React.FC = () => {
               index={index}
               isActive={activeService === service.id}
               onToggle={() => handleServiceToggle(service.id)}
+              requestQuoteLabel={t('nav.requestQuote')}
             />
           ))}
         </div>

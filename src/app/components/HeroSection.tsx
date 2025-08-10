@@ -279,8 +279,9 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           </motion.button>
 
           <a
-            href="#case-studies"
+            href="#portfolio"
             className="text-white/80 font-medium border-b border-red-500/50 hover:border-red-500 hover:text-white transition-colors pb-1"
+            aria-label="Ir para o portfólio"
           >
             {t('heroSection.cta.secondary') as string}
           </a>

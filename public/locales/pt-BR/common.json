@@ -13,7 +13,7 @@
       "first": "Rafael Rocha",
       "second": "Desenvolvedor Web"
     },
-    "subtitle": "Desenvolvedor Web Fullstack criando experiências digitais únicas e impressionantes",
+    "subtitle": "Desenvolvedor Fullstack criando produtos digitais rápidos, acessíveis e pensados para conversão",
     "metrics": {
       "satisfaction": "Satisfação",
       "projects": "Projetos",
@@ -29,11 +29,11 @@
     "portfolioProjects": "Projetos no Portfólio"
   },
   "servicesSection": {
-    "title": "Soluções Que Geram Resultados",
-    "subtitle": "Convertemos investimento em crescimento real e mensurável. Cada serviço é desenvolvido com foco em ROI comprovado.",
+    "title": "Soluções que geram resultado",
+    "subtitle": "Projetos orientados a métricas: performance, SEO técnico e UX que converte. Sem promessas irreais, apenas trabalho de qualidade.",
     "cta": {
-      "title": "Transforme seu investimento em resultados mensuráveis",
-      "subtitle": "Consultoria inicial gratuita • Orçamento em até 24h • Garantia de satisfação"
+      "title": "Pronto para acelerar seu projeto?",
+      "subtitle": "Consultoria inicial gratuita • Orçamento em até 24h"
     },
     "services": [
       {
@@ -64,7 +64,7 @@
   },
   "portfolioSection": {
     "title": "Projetos Recentes",
-    "subtitle": "Confira alguns dos trabalhos que desenvolvi para clientes satisfeitos",
+    "subtitle": "Alguns cases que entregaram performance, clareza e resultados",
     "featured": "DESTAQUE",
     "metrics": {
       "performance": "Performance",
@@ -94,9 +94,9 @@
     "subtitle": "Depoimentos de clientes que transformaram suas ideias em realidade"
   },
   "contactSection": {
-    "title": "ENTRE EM CONTATO",
-    "subtitle": "Vamos transformar suas ideias em realidade. Conte-nos sobre o seu projeto e descubra como podemos impulsionar seus resultados!",
-    "badge": "Estamos disponíveis • Resposta em até 24h",
+    "title": "Fale com a Vulcano",
+    "subtitle": "Conte sobre seus objetivos e receba um diagnóstico inicial com próximos passos claros.",
+    "badge": "Resposta em até 24h • Atendimento humano",
     "form": {
       "name": "Seu nome",
       "email": "Seu email",
