@@ -29,7 +29,6 @@ export const metadata: Metadata = {
   manifest: '/manifest.json',
   icons: {
     icon: '/favicon.ico',
-    apple: '/apple-icon.png',
   },
 }
 
@@ -64,7 +63,7 @@ export default function RootLayout({
 
         {children}
         
-        {/* Performance optimization script - Run after page loads */}
+        {/* Performance optimization script - Run after page loads (no SW in dev) */}
         <Script
           id="performance-init"
           strategy="afterInteractive"
@@ -81,14 +80,7 @@ export default function RootLayout({
                 document.head.appendChild(link);
               });
               
-              // 2. Register service worker if supported
-              if ('serviceWorker' in navigator && window.location.hostname !== 'localhost') {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/sw.js').catch(err => {
-                    console.log('Service worker registration failed:', err);
-                  });
-                });
-              }
+              // 2. Service worker intentionally disabled in development to avoid caching issues
               
               // 3. Report Web Vitals for analytics
               function reportWebVitals() {

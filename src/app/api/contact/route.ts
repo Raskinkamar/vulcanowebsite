@@ -25,7 +25,10 @@ export async function POST(req: NextRequest) {
     const dir = join(process.cwd(), baseDir, dateDir);
     await mkdir(dir, { recursive: true });
 
-    const safeSubject = (subject || message.slice(0, 64) || 'sem-assunto').replace(/[^\p{L}\p{N}\s-_.,]/gu, '').trim() || 'sem-assunto';
+    // Remover caracteres potencialmente perigosos do nome do arquivo. Evitar classes Unicode para compatibilidade do bundler.
+    const safeSubject = (subject || message.slice(0, 64) || 'sem-assunto')
+      .replace(/[^a-zA-Z0-9\s\-_.]/g, '')
+      .trim() || 'sem-assunto';
     const filename = `${yyyy}${mm}${dd}_${hh}${min}${ss}_${safeSubject.replace(/\s+/g, '-').toLowerCase()}.txt`;
     const filePath = join(dir, filename);
 

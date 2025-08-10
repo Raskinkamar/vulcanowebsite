@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { buildSystemPrompt, formatContext, retrieve } from "@/src/lib/rag";
+import { buildSystemPrompt, formatContext, retrieve } from "@/lib/rag";
 
 export const runtime = "nodejs";
 

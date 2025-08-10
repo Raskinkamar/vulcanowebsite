@@ -3,6 +3,8 @@
 // Importar configurações de i18n
 const { i18n } = require('./next-i18next.config');
 
+const isProd = process.env.NODE_ENV === 'production'
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -32,70 +34,43 @@ const nextConfig = {
   
   // Configuração de headers para performance
   async headers() {
-    return [
+    const base = [
       {
-        // Aplica a todas as rotas
         source: '/:path*',
         headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on'
-          },
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block'
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN'
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
-          },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, must-revalidate'
-          }
+          { key: 'X-DNS-Prefetch-Control', value: 'on' },
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains; preload' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'Referrer-Policy', value: 'origin-when-cross-origin' },
         ]
       },
+    ]
+    if (!isProd) {
+      return base
+    }
+    return [
+      ...base,
       {
-        // Caching mais agressivo para assets estáticos
         source: '/:path*.(jpg|jpeg|gif|png|svg|ico|webp|avif)',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
         ]
       },
       {
         source: '/:path*.(js|css)',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
         ]
       },
       {
         source: '/:path*.(woff|woff2|ttf|otf)',
         headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }
         ]
       }
-    ];
+    ]
   },
 
   // Configuração de webpack para otimizar o bundle

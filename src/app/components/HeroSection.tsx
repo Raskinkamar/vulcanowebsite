@@ -165,6 +165,40 @@ const CleanTechBadge: React.FC<{
   )
 }
 
+// Carrossel inclinado de tecnologias
+const TechCarousel: React.FC = () => {
+  return (
+    <div className="relative">
+      {/* bordas com fade para dar sensação de app */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black to-transparent z-10" />
+      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 sm:px-8 [-webkit-overflow-scrolling:touch] scrollbar-hide">
+        {TECHNOLOGIES.map((tech, i) => (
+          <motion.div
+            key={tech.name}
+            className="snap-center flex-shrink-0"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 * i }}
+            style={{ rotate: '-5deg' }}
+            whileHover={{ y: -4 }}
+          >
+            <div className="relative w-44 h-16 rounded-xl border border-white/10 bg-black/40">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 to-transparent" />
+              <div className="relative h-full w-full flex items-center gap-3 px-4" style={{ rotate: '5deg' }}>
+                <div className="w-5 h-5 text-white/80 flex items-center justify-center">{tech.icon}</div>
+                <div className="text-white/90 font-medium text-sm">
+                  {tech.name}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) => {
   const { t } = useTranslation();
   return (
@@ -318,20 +352,15 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           </a>
         </motion.div>
 
-        {/* Technologies limpo */}
-          <motion.div
+        {/* Technologies - carrossel inclinado */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="space-y-6"
+          className="space-y-4"
         >
           <div className="text-sm text-gray-400 font-medium uppercase tracking-wider">{t('heroSection.techTitle') as string}</div>
-
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-            {TECHNOLOGIES.map((tech, index) => (
-              <CleanTechBadge key={tech.name} tech={tech} index={index} />
-            ))}
-          </div>
+          <TechCarousel />
         </motion.div>
 
         {/* Scroll indicator limpo */}

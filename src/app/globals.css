@@ -27,6 +27,16 @@ body {
   .snap-center { scroll-snap-align: center; }
 }
 
+/* Marquee animations for TechCarousel */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
 /* Opcional: Para garantir scroll suave em todos navegadores */
 html {
   scroll-behavior: smooth;
