@@ -253,17 +253,19 @@ const AdvancedServices: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Services grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        {/* Services: grid on desktop, horizontal snap carousel on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 md:overflow-visible overflow-x-auto snap-x snap-mandatory [-webkit-overflow-scrolling:touch] px-1 md:px-0">
           {services.map((service, index) => (
-            <ServiceCard
+            <div key={service.id} className="md:contents flex-shrink-0 w-[85%] sm:w-[60%] snap-center md:w-auto">
+              <ServiceCard
               key={service.id}
               service={service}
               index={index}
               isActive={activeService === service.id}
               onToggle={() => handleServiceToggle(service.id)}
               requestQuoteLabel={t('nav.requestQuote')}
-            />
+              />
+            </div>
           ))}
         </div>
 

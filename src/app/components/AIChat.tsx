@@ -79,7 +79,7 @@ export default function AIChat() {
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="fixed bottom-5 right-5 z-50 rounded-full bg-red-600 hover:bg-red-700 text-white p-4 shadow-lg"
+          className="fixed bottom-5 right-5 z-50 rounded-full bg-red-600 hover:bg-red-700 text-white p-4 shadow-lg sm:bottom-6 sm:right-6"
           aria-label="Abrir chat IA"
         >
           <Bot className="w-6 h-6" />
@@ -87,7 +87,7 @@ export default function AIChat() {
       )}
 
       {open && (
-        <div className="fixed bottom-5 right-5 z-50 w-[92vw] max-w-sm h-[70vh] bg-black/90 border border-white/10 rounded-xl backdrop-blur p-3 flex flex-col">
+        <div className="fixed bottom-0 left-0 right-0 z-50 w-full sm:bottom-5 sm:right-5 sm:left-auto sm:w-[92vw] sm:max-w-sm h-[75vh] sm:h-[70vh] bg-black/95 sm:bg-black/90 border-t sm:border border-white/10 rounded-t-2xl sm:rounded-xl backdrop-blur p-3 flex flex-col">
           {/* Header */}
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2 text-white">

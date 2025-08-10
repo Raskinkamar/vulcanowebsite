@@ -191,7 +191,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           ease: "easeInOut",
         }}
       >
-        <div className="relative w-full h-full" style={{ transform: "scaleX(-1)" }}>
+        <div className="relative w-full h-full hidden sm:block" style={{ transform: "scaleX(-1)" }}>
           <Image
             src="/images/greek/planet2.gif"
             alt="Planeta girando"

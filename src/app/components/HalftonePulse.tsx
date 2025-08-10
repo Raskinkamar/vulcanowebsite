@@ -31,6 +31,8 @@ const HalftonePulse: React.FC<HalftonePulseProps> = ({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animationRef = useRef<number>(0);
   const startTimeRef = useRef<number>(0);
+  const reducedMotionRef = useRef<boolean>(false);
+  const isMobileRef = useRef<boolean>(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -40,6 +42,11 @@ const HalftonePulse: React.FC<HalftonePulseProps> = ({
     if (!ctx) return;
 
     let devicePixelRatio = Math.max(1, window.devicePixelRatio || 1);
+    // Media queries for mobile and reduced motion
+    const mqlReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mqlMobile = window.matchMedia('(max-width: 640px)');
+    reducedMotionRef.current = !!mqlReduced.matches;
+    isMobileRef.current = !!mqlMobile.matches;
 
     const resize = () => {
       const { innerWidth, innerHeight } = window;
@@ -57,6 +64,8 @@ const HalftonePulse: React.FC<HalftonePulseProps> = ({
 
     window.addEventListener('resize', resize);
     window.matchMedia(`(resolution: ${devicePixelRatio}dppx)`).addEventListener?.('change', handleDprChange);
+    mqlReduced.addEventListener?.('change', () => { reducedMotionRef.current = !!mqlReduced.matches; });
+    mqlMobile.addEventListener?.('change', () => { isMobileRef.current = !!mqlMobile.matches; });
     resize();
 
     startTimeRef.current = performance.now();
@@ -72,17 +81,22 @@ const HalftonePulse: React.FC<HalftonePulseProps> = ({
       ctx.globalCompositeOperation = blendMode;
 
       // Smooth global pulsing amplitude 0..1
-      const pulse = 0.5 + 0.5 * Math.sin(t * 0.5);
+      const pulse = reducedMotionRef.current ? 0.75 : 0.5 + 0.5 * Math.sin(t * 0.5);
       const cx = width / 2;
       const cy = height / 2;
 
-      for (let x = 0; x <= width; x += dotGap) {
-        for (let y = 0; y <= height; y += dotGap) {
+      // Mobile tuning: bigger gaps, lower opacity
+      const localGap = isMobileRef.current ? Math.max(dotGap, 28) : dotGap;
+      const localOpacity = isMobileRef.current ? Math.min(opacity, 0.18) : opacity;
+
+      for (let x = 0; x <= width; x += localGap) {
+        for (let y = 0; y <= height; y += localGap) {
           // Directional traveling wave
-          const wave = Math.sin(x * frequency + t * (speed * 60)) * Math.cos(y * frequency * 0.8 + t * (speed * 42));
+          const wave = Math.sin(x * frequency + (reducedMotionRef.current ? 0 : t * (speed * 60))) *
+                       Math.cos(y * frequency * 0.8 + (reducedMotionRef.current ? 0 : t * (speed * 42)));
           // Radial pulse propagating from center
           const dist = Math.hypot(x - cx, y - cy);
-          const radial = Math.sin(dist * frequency * 0.7 - t * pulseSpeed);
+          const radial = Math.sin(dist * frequency * 0.7 - (reducedMotionRef.current ? 0 : t * pulseSpeed));
 
           // Combine influences and normalize to 0..1
           const influence = 0.6 * wave + 0.4 * radial; // -1..1
@@ -95,12 +109,14 @@ const HalftonePulse: React.FC<HalftonePulseProps> = ({
 
           ctx.beginPath();
           ctx.arc(x, y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${color}, ${opacity})`;
+          ctx.fillStyle = `rgba(${color}, ${localOpacity})`;
           ctx.fill();
         }
       }
 
-      animationRef.current = requestAnimationFrame(animate);
+      if (!reducedMotionRef.current) {
+        animationRef.current = requestAnimationFrame(animate);
+      }
     };
 
     animate();
