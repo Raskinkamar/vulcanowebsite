@@ -208,20 +208,20 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
 
 
 
-      {/* Mobile planet (different layout): centered, smaller, behind text */}
+      {/* Mobile planet (app-like layout): docked bottom-right behind content */}
       <motion.div
         className="absolute block sm:hidden pointer-events-none"
         style={{
-          left: "50%",
-          top: "24%",
-          transform: "translate(-50%, -30%)",
-          width: "82vw",
-          height: "42vh",
+          right: 0,
+          bottom: 0,
+          transform: "translate(10%, 10%)",
+          width: "78vw",
+          height: "38vh",
           zIndex: 0,
-          opacity: 0.85,
+          opacity: 0.8,
         }}
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 9, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        animate={{ x: [0, -8, 0] }}
+        transition={{ duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       >
         <div className="relative w-full h-full">
           <Image
@@ -230,11 +230,11 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
             fill
             unoptimized
             priority
-            sizes="82vw"
+            sizes="78vw"
             style={{ objectFit: "contain", objectPosition: "center" }}
           />
           {/* vignette for legibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent via-black/20 to-black/60" />
         </div>
       </motion.div>
 

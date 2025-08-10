@@ -220,7 +220,7 @@ const AdvancedServices: React.FC = () => {
     <section className="relative w-full min-h-screen bg-black text-white py-20">
       {/* Background do ser luminoso */}
       <div
-        className="absolute opacity-80 pointer-events-none"
+        className="absolute opacity-80 pointer-events-none hidden md:block"
         style={{
           backgroundImage: "url('/images/greek/blaco2.gif')",
           backgroundPosition: "right center",
