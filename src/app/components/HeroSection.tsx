@@ -1,7 +1,6 @@
 "use client"
 
-import type React from "react"
-import { useState } from "react"
+import React, { useState } from "react"
 import { motion } from "framer-motion"
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react"
 import Image from "next/image"
@@ -165,35 +164,53 @@ const CleanTechBadge: React.FC<{
   )
 }
 
-// Carrossel inclinado de tecnologias
+// Carrossel inclinado de tecnologias com movimento contínuo
 const TechCarousel: React.FC = () => {
+  const [paused, setPaused] = useState(false)
+  const [reduced, setReduced] = useState(false)
+
+  // Detecta prefers-reduced-motion
+  React.useEffect(() => {
+    if (typeof window === 'undefined') return
+    const m = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const handler = () => setReduced(!!m.matches)
+    handler()
+    m.addEventListener?.('change', handler)
+    return () => m.removeEventListener?.('change', handler)
+  }, [])
+
+  // Duplicar itens para loop infinito
+  const items = React.useMemo(() => [...TECHNOLOGIES, ...TECHNOLOGIES], [])
+
   return (
     <div className="relative">
-      {/* bordas com fade para dar sensação de app */}
-      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black to-transparent z-10" />
-      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black to-transparent z-10" />
-      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 sm:px-8 [-webkit-overflow-scrolling:touch] scrollbar-hide">
-        {TECHNOLOGIES.map((tech, i) => (
-          <motion.div
-            key={tech.name}
-            className="snap-center flex-shrink-0"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 * i }}
-            style={{ rotate: '-5deg' }}
-            whileHover={{ y: -4 }}
-          >
-            <div className="relative w-44 h-16 rounded-xl border border-white/10 bg-black/40">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 to-transparent" />
-              <div className="relative h-full w-full flex items-center gap-3 px-4" style={{ rotate: '5deg' }}>
-                <div className="w-5 h-5 text-white/80 flex items-center justify-center">{tech.icon}</div>
-                <div className="text-white/90 font-medium text-sm">
-                  {tech.name}
+      {/* Fades laterais */}
+      <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-black to-transparent z-10" />
+      <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-black to-transparent z-10" />
+
+      <div
+        className="overflow-hidden px-4 sm:px-6"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
+        <motion.div
+          className="flex gap-4 will-change-transform"
+          style={{ rotate: '-6deg' }}
+          animate={reduced || paused ? { x: 0 } : { x: ['0%', '-50%'] }}
+          transition={reduced || paused ? { duration: 0 } : { duration: 18, ease: 'linear', repeat: Number.POSITIVE_INFINITY }}
+        >
+          {items.map((tech, i) => (
+            <div key={`${tech.name}-${i}`} className="flex-shrink-0">
+              <div className="relative w-44 h-16 rounded-xl border border-white/10 bg-black/40">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 to-transparent" />
+                <div className="relative h-full w-full flex items-center gap-3 px-4" style={{ rotate: '6deg' }}>
+                  <div className="w-5 h-5 text-white/80 flex items-center justify-center">{tech.icon}</div>
+                  <div className="text-white/90 font-medium text-sm">{tech.name}</div>
                 </div>
               </div>
             </div>
-          </motion.div>
-        ))}
+          ))}
+        </motion.div>
       </div>
     </div>
   )
