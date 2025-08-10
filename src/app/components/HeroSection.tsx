@@ -17,7 +17,7 @@ import {
   SiVuedotjs,
   SiLaravel,
 } from "react-icons/si"
-import MobileGifShowcase from "./MobileGifShowcase"
+// Mobile-specific planet layout (different from desktop)
 
 interface HeroSectionProps {
   onViewPortfolio: () => void
@@ -208,22 +208,43 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
 
 
 
-      {/* Showcase de GIFs no mobile */}
-      <MobileGifShowcase
-        gifs={[
-          { src: "/images/greek/planet2.gif", alt: "Planeta" },
-          { src: "/images/greek/hand.gif", alt: "Mão grega" },
-          { src: "/images/greek/galaxy.gif", alt: "Galáxia" },
-        ]}
-      />
+      {/* Mobile planet (different layout): centered, smaller, behind text */}
+      <motion.div
+        className="absolute block sm:hidden pointer-events-none"
+        style={{
+          left: "50%",
+          top: "24%",
+          transform: "translate(-50%, -30%)",
+          width: "82vw",
+          height: "42vh",
+          zIndex: 0,
+          opacity: 0.85,
+        }}
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 9, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+      >
+        <div className="relative w-full h-full">
+          <Image
+            src="/images/greek/planet2.gif"
+            alt="Planeta girando"
+            fill
+            unoptimized
+            priority
+            sizes="82vw"
+            style={{ objectFit: "contain", objectPosition: "center" }}
+          />
+          {/* vignette for legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/60" />
+        </div>
+      </motion.div>
 
       {/* Hero Content */}
-      <div className="relative z-20 text-center px-6 max-w-6xl mx-auto">
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
         {/* Badge simples */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-3 px-6 py-3 mb-8 bg-white/5 border border-white/10 rounded-full"
+          className="inline-flex items-center gap-3 px-4 sm:px-6 py-2.5 sm:py-3 mb-6 sm:mb-8 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm"
         >
           <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
           <span className="text-white/80 font-medium text-sm">{t('heroSection.availability') as string}</span>
@@ -255,7 +276,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="flex justify-center gap-12 mb-12"
+          className="flex justify-center gap-8 sm:gap-12 mb-8 sm:mb-12"
         >
           {[
             { value: "100%", label: t('heroSection.metrics.satisfaction') as string },
@@ -270,11 +291,11 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
         </motion.div>
 
         {/* CTAs limpos */}
-          <motion.div
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-16"
         >
           <motion.button
             onClick={onViewPortfolio}
