@@ -100,7 +100,7 @@
     "form": {
       "name": "Seu nome",
       "email": "Seu email",
-      "subject": "Assunto",
+      "subject": "Assunto (opcional)",
       "message": "Sua mensagem",
       "send": "Enviar Mensagem",
       "privacy": "Seu contato é confidencial • Responderemos em até 24h"

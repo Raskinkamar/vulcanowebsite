@@ -26,11 +26,30 @@ export default function Contact() {
   const { t } = useTranslation();
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
+  const [subject, setSubject] = useState("")
   const [message, setMessage] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+  const [status, setStatus] = useState<null | { ok: boolean; msg: string }>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log({ name, email, message })
+    setSubmitting(true)
+    setStatus(null)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message })
+      })
+      const data = await res.json()
+      if (!res.ok || !data?.success) throw new Error(data?.message || 'Erro ao salvar contato')
+      setStatus({ ok: true, msg: 'Recebido! Entraremos em contato.' })
+      setName(''); setEmail(''); setSubject(''); setMessage('')
+    } catch (err: any) {
+      setStatus({ ok: false, msg: 'Falha ao salvar. Tente novamente.' })
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -157,7 +176,19 @@ export default function Contact() {
                   className="w-full p-4 pl-16 rounded-lg bg-white/5 backdrop-blur-sm placeholder-gray-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500/50 transition-all text-white"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
+                />
+              </div>
+
+              <div className="relative group">
+                <div className="absolute top-0 left-0 h-full w-12 bg-white/5 rounded-l-lg flex items-center justify-center border-r border-white/10">
+                  <MessageSquare className="text-red-400" size={18} />
+                </div>
+                <input
+                  type="text"
+                  placeholder={t('contactSection.form.subject')}
+                  className="w-full p-4 pl-16 rounded-lg bg-white/5 backdrop-blur-sm placeholder-gray-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500/50 transition-all text-white"
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
                 />
               </div>
 
@@ -181,9 +212,10 @@ export default function Contact() {
               type="submit"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full px-8 py-4 bg-gradient-to-r from-red-500 to-red-700 rounded-lg text-white font-bold text-lg transition-all duration-300 shadow-lg flex items-center justify-center gap-2"
+              disabled={submitting}
+              className="w-full px-8 py-4 bg-gradient-to-r from-red-500 to-red-700 rounded-lg text-white font-bold text-lg transition-all duration-300 shadow-lg flex items-center justify-center gap-2 disabled:opacity-60"
             >
-              <span>{t('contactSection.form.send')}</span>
+              <span>{submitting ? 'Enviando…' : t('contactSection.form.send')}</span>
               <Send className="w-5 h-5" />
             </motion.button>
 
@@ -192,6 +224,10 @@ export default function Contact() {
               <Shield className="w-4 h-4 text-red-400" />
               <span>{t('contactSection.form.privacy')}</span>
             </div>
+
+            {status && (
+              <div className={`text-center text-sm mt-3 ${status.ok ? 'text-green-400' : 'text-red-400'}`}>{status.msg}</div>
+            )}
           </motion.form>
 
           {/* Informações de contato */}
