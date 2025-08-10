@@ -43,25 +43,25 @@ const MinimalBackground: React.FC = () => {
 
       {/* Partículas minimalistas */}
       {[...Array(4)].map((_, i) => (
-        <motion.div
-          key={i}
+          <motion.div
+            key={i}
           className="absolute w-1 h-1 bg-red-500/30 rounded-full"
-          style={{
+            style={{
             top: `${15 + i * 25}%`,
             left: `${5 + i * 20}%`,
-          }}
-          animate={{
+            }}
+            animate={{
             opacity: [0.3, 0.7, 0.3],
             scale: [1, 1.5, 1],
-          }}
-          transition={{
+            }}
+            transition={{
             duration: 4 + i,
             repeat: Number.POSITIVE_INFINITY,
             ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
+            }}
+          />
+        ))}
+      </div>
   )
 }
 
@@ -73,15 +73,15 @@ const TestimonialCard: React.FC<{
   const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <motion.div
+        <motion.div
       initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="relative group h-full"
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="relative group h-full snap-center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <motion.div
+                    <motion.div
         className="relative bg-black/40 border border-white/10 rounded-2xl overflow-hidden transition-all duration-300 hover:border-red-500/30 hover:bg-black/60 h-full"
         whileHover={{ y: -4 }}
       >
@@ -124,18 +124,18 @@ const TestimonialCard: React.FC<{
             <div className="relative">
               {testimonial.avatar ? (
                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20">
-                  <Image
+                    <Image
                     src={testimonial.avatar || "/placeholder.svg"}
-                    alt={testimonial.name}
+                      alt={testimonial.name}
                     fill
                     className="object-cover"
-                  />
-                </div>
-              ) : (
+                    />
+                  </div>
+                ) : (
                 <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center text-lg font-bold text-white border-2 border-white/20">
-                  {testimonial.name[0]}
-                </div>
-              )}
+                    {testimonial.name[0]}
+                  </div>
+                )}
 
               {/* Verified badge */}
               <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-black flex items-center justify-center">
@@ -154,7 +154,7 @@ const TestimonialCard: React.FC<{
                     <span className="text-red-400 font-medium">{testimonial.company}</span>
                   </>
                 )}
-              </div>
+                </div>
               <div className="flex items-center gap-1 mt-1">
                 <Shield className="w-3 h-3 text-green-400" />
                 <span className="text-xs text-green-400 font-medium">Verificado</span>
@@ -177,18 +177,7 @@ const AdvancedTestimonials: React.FC<TestimonialsProps> = ({ testimonials }) => 
 
       {/* Background galaxy GIF com opacidade reduzida */}
       <div
-        className="absolute opacity-70 pointer-events-none"
-        style={{
-          backgroundImage: "url('/images/greek/galaxy.gif')",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          right: "0",
-          top: "0",
-          width: "40%",
-          height: "100%",
-          zIndex: 1,
-        }}
+        className="absolute opacity-70 pointer-events-none right-0 top-0 w-full h-56 md:w-2/5 md:h-full bg-[url('/images/greek/spaces.gif')] bg-contain md:bg-cover bg-right md:bg-center bg-no-repeat z-[1]"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -242,10 +231,10 @@ const AdvancedTestimonials: React.FC<TestimonialsProps> = ({ testimonials }) => 
               </motion.div>
             ))}
           </div>
-        </motion.div>
+            </motion.div>
 
         {/* Testimonials grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid grid-flow-col auto-cols-[80%] overflow-x-auto snap-x snap-mandatory md:grid-flow-row md:auto-cols-auto md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 px-1">
           {testimonials.map((testimonial, index) => (
             <TestimonialCard key={index} testimonial={testimonial} index={index} />
           ))}

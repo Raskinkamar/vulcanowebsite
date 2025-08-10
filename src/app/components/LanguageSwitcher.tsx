@@ -13,7 +13,8 @@ const LanguageSwitcher: React.FC = () => {
 
   const localeNames = {
     'pt-BR': 'Português',
-    'en-US': 'English'
+    'en-US': 'English',
+    'es-ES': 'Español'
   };
 
   return (

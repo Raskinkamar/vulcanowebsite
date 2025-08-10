@@ -4,6 +4,7 @@ import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { MessageSquare, Globe, Code, Smartphone, Database, ArrowUpRight, CheckCircle } from "lucide-react"
+import { useTranslation } from "../hooks/useTranslation"
 
 interface ServiceItem {
   id: string
@@ -194,7 +195,7 @@ const ServiceCard: React.FC<{
                   </ul>
 
                   <button className="w-full mt-4 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-white font-medium text-sm transition-colors">
-                    Solicitar Orçamento
+                    {t('nav.requestQuote')}
                   </button>
                 </div>
               </motion.div>
@@ -207,6 +208,7 @@ const ServiceCard: React.FC<{
 }
 
 const AdvancedServices: React.FC = () => {
+  const { t } = useTranslation();
   const [activeService, setActiveService] = useState<string | null>(null)
 
   const handleServiceToggle = (id: string) => {
@@ -237,18 +239,17 @@ const AdvancedServices: React.FC = () => {
         <motion.div className="text-center mb-16" initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-white/5 border border-white/10 rounded-full">
             <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-            <span className="text-white/80 font-medium text-sm">Serviços</span>
+            <span className="text-white/80 font-medium text-sm">{t('servicesSection.title')}</span>
           </div>
 
           <h2 className="text-5xl md:text-6xl font-black mb-6">
-            <span className="text-white">SOLUÇÕES QUE</span>
+            <span className="text-white">{t('servicesSection.title').split(' ')[0]}</span>
             <br />
-            <span className="text-red-500">GERAM RESULTADOS</span>
+            <span className="text-red-500">{t('servicesSection.title').split(' ')[1]}</span>
           </h2>
 
           <p className="text-xl text-white/70 max-w-4xl mx-auto">
-            Convertemos investimento em <span className="text-white font-semibold">crescimento real e mensurável</span>.
-            Cada serviço é desenvolvido com foco em <span className="text-red-500 font-semibold">ROI comprovado</span>.
+            {t('servicesSection.subtitle')}
           </p>
         </motion.div>
 
@@ -273,13 +274,13 @@ const AdvancedServices: React.FC = () => {
           className="text-center p-12 bg-white/5 border border-white/10 rounded-2xl"
         >
           <h3 className="text-3xl font-bold text-white mb-4">
-            Transforme seu <span className="text-red-500">investimento</span> em resultados mensuráveis
+            {t('servicesSection.cta.title')}
           </h3>
           <p className="text-white/70 mb-8 max-w-2xl mx-auto">
-            Consultoria inicial gratuita • Orçamento em até 24h • Garantia de satisfação
+            {t('servicesSection.cta.subtitle')}
           </p>
           <button className="px-8 py-4 bg-red-600 hover:bg-red-700 rounded-lg text-white font-bold transition-colors">
-            Solicitar Proposta Personalizada
+            {t('nav.requestQuote')}
           </button>
         </motion.div>
       </div>

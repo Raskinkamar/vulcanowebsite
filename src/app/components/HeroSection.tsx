@@ -5,6 +5,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { ChevronDown, ArrowRight, Sparkles } from "lucide-react"
 import Image from "next/image"
+import { useTranslation } from "../hooks/useTranslation"
 import {
   SiReact,
   SiNextdotjs,
@@ -164,6 +165,7 @@ const CleanTechBadge: React.FC<{
 }
 
 const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) => {
+  const { t } = useTranslation();
   return (
     <section className="relative flex flex-col items-center justify-center min-h-screen w-full text-white overflow-hidden bg-black">
       <MinimalBackground />
@@ -178,7 +180,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           width: "45%",
           height: "90%",
           zIndex: 1,
-          opacity: 0.8,
+          opacity: 0.6,
         }}
         animate={{
           y: [0, -10, 0],
@@ -198,7 +200,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
             unoptimized
             priority
             sizes="(max-width: 768px) 100vw, 45vw"
-            quality={80}
+            quality={100}
           />
         </div>
       </motion.div>
@@ -214,7 +216,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           className="inline-flex items-center gap-3 px-6 py-3 mb-8 bg-white/5 border border-white/10 rounded-full"
         >
           <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-          <span className="text-white/80 font-medium text-sm">Disponível para novos projetos</span>
+          <span className="text-white/80 font-medium text-sm">{t('heroSection.availability') as string}</span>
         </motion.div>
 
         {/* Título principal limpo */}
@@ -224,8 +226,8 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-5xl sm:text-6xl md:text-8xl font-black mb-8 leading-tight"
         >
-          <span className="block text-white mb-2">TRANSFORMAMOS</span>
-          <span className="block text-red-500">IDEIAS EM RESULTADOS</span>
+          <span className="block text-white mb-2">{t('heroSection.mainTitle.first') as string}</span>
+          <span className="block text-red-500">{t('heroSection.mainTitle.second') as string}</span>
         </motion.h1>
 
         {/* Subtítulo */}
@@ -235,8 +237,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           transition={{ delay: 0.4, duration: 0.8 }}
           className="text-xl md:text-2xl text-white/70 max-w-4xl mx-auto mb-12 leading-relaxed"
         >
-          Potencializamos negócios ambiciosos com{" "}
-          <span className="text-white font-semibold">soluções digitais inovadoras</span>.
+          {t('heroSection.subtitle') as string}
         </motion.p>
 
         {/* Métricas limpas */}
@@ -247,9 +248,9 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           className="flex justify-center gap-12 mb-12"
         >
           {[
-            { value: "100%", label: "Satisfação" },
-            { value: "150+", label: "Projetos" },
-            { value: "24h", label: "Suporte" },
+            { value: "100%", label: t('heroSection.metrics.satisfaction') as string },
+            { value: "150+", label: t('heroSection.metrics.projects') as string },
+            { value: "24h", label: t('heroSection.metrics.support') as string },
           ].map((metric, idx) => (
             <motion.div key={metric.label} className="text-center" whileHover={{ scale: 1.05 }}>
               <div className="text-3xl font-bold text-red-500 mb-1">{metric.value}</div>
@@ -272,7 +273,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
             whileTap={{ scale: 0.98 }}
           >
             <span className="flex items-center gap-2">
-              Impulsione seu negócio
+              {t('heroSection.cta.primary') as string}
               <ArrowRight className="w-5 h-5" />
             </span>
           </motion.button>
@@ -281,7 +282,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
             href="#case-studies"
             className="text-white/80 font-medium border-b border-red-500/50 hover:border-red-500 hover:text-white transition-colors pb-1"
           >
-            Ver casos de sucesso
+            {t('heroSection.cta.secondary') as string}
           </a>
         </motion.div>
 
@@ -292,7 +293,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           transition={{ delay: 1, duration: 0.8 }}
           className="space-y-6"
         >
-          <div className="text-sm text-gray-400 font-medium uppercase tracking-wider">TECNOLOGIAS QUE DOMINAMOS</div>
+          <div className="text-sm text-gray-400 font-medium uppercase tracking-wider">{t('heroSection.techTitle') as string}</div>
 
           <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
             {TECHNOLOGIES.map((tech, index) => (
@@ -308,7 +309,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           transition={{ delay: 2, duration: 2, repeat: Number.POSITIVE_INFINITY }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-gray-400"
         >
-          <span className="text-xs mb-2">Role para descobrir</span>
+          <span className="text-xs mb-2">{t('heroSection.scrollHint') as string}</span>
           <ChevronDown className="w-5 h-5" />
         </motion.div>
       </div>

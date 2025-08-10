@@ -1,60 +1,167 @@
 {
-  "navigation": {
+  "nav": {
     "home": "Início",
     "services": "Serviços",
     "portfolio": "Portfólio",
+    "testimonials": "Depoimentos",
     "contact": "Contato",
     "requestQuote": "Solicitar Orçamento"
   },
   "heroSection": {
     "availability": "Disponível para novos projetos",
     "mainTitle": {
-      "first": "TRANSFORMAMOS",
-      "second": "IDEIAS EM RESULTADOS"
+      "first": "Rafael Rocha",
+      "second": "Desenvolvedor Web"
     },
-    "subtitle": "Potencializamos negócios ambiciosos com soluções digitais inovadoras",
+    "subtitle": "Desenvolvedor Web Fullstack criando experiências digitais únicas e impressionantes",
     "metrics": {
       "satisfaction": "Satisfação",
       "projects": "Projetos",
       "support": "Suporte"
     },
     "cta": {
-      "primary": "Impulsione seu negócio",
-      "secondary": "Ver casos de sucesso"
+      "primary": "Ver Portfólio",
+      "secondary": "Saiba mais"
     },
-    "techTitle": "TECNOLOGIAS QUE DOMINAMOS",
-    "scrollHint": "Role para descobrir"
+    "techTitle": "TECNOLOGIAS",
+    "scrollHint": "Rolar para baixo",
+    "backgroundAlt": "Fundo abstrato",
+    "portfolioProjects": "Projetos no Portfólio"
+  },
+  "servicesSection": {
+    "title": "Soluções Que Geram Resultados",
+    "subtitle": "Convertemos investimento em crescimento real e mensurável. Cada serviço é desenvolvido com foco em ROI comprovado.",
+    "cta": {
+      "title": "Transforme seu investimento em resultados mensuráveis",
+      "subtitle": "Consultoria inicial gratuita • Orçamento em até 24h • Garantia de satisfação"
+    },
+    "services": [
+      {
+        "title": "Web Development",
+        "description": "Sites responsivos e aplicações web modernas com as melhores tecnologias do mercado."
+      },
+      {
+        "title": "Aplicações Mobile",
+        "description": "Apps nativos e híbridos para iOS e Android que proporcionam experiências excepcionais aos usuários."
+      },
+      {
+        "title": "ChatBots e IA",
+        "description": "Assistentes virtuais inteligentes e soluções de IA para automatizar processos e melhorar o atendimento."
+      },
+      {
+        "title": "E-commerce",
+        "description": "Lojas online completas com gestão de produtos, pagamentos integrados e experiência de compra otimizada."
+      },
+      {
+        "title": "UI/UX Design",
+        "description": "Interfaces intuitivas e atraentes que proporcionam a melhor experiência para seus usuários."
+      },
+      {
+        "title": "Consultoria Tech",
+        "description": "Orientação especializada para ajudar sua empresa a tomar as melhores decisões tecnológicas."
+      }
+    ]
+  },
+  "portfolioSection": {
+    "title": "Projetos Recentes",
+    "subtitle": "Confira alguns dos trabalhos que desenvolvi para clientes satisfeitos",
+    "featured": "DESTAQUE",
+    "metrics": {
+      "performance": "Performance",
+      "satisfaction": "Satisfação",
+      "users": "Usuários"
+    },
+    "cta": {
+      "explore": "Ver Exemplo"
+    },
+    "categories": {
+      "all": "Todos",
+      "web": "Web",
+      "mobile": "Mobile",
+      "ai": "AI",
+      "ecommerce": "E-commerce"
+    },
+    "modal": {
+      "overview": "Visão Geral",
+      "examples": "Exemplos",
+      "technologies": "Tecnologias",
+      "examplesCount": "{{count}} exemplos disponíveis",
+      "requestSimilar": "Solicitar Projeto Similar"
+    }
+  },
+  "testimonialsSection": {
+    "title": "O que dizem sobre mim",
+    "subtitle": "Depoimentos de clientes que transformaram suas ideias em realidade"
   },
   "contactSection": {
-    "availability": "Estamos disponíveis • Resposta em até 24h",
-    "title": {
-      "first": "ENTRE EM",
-      "second": "CONTATO"
-    },
-    "description": "Vamos transformar suas ideias em realidade. Conte-nos sobre o seu projeto e descubra como podemos impulsionar seus resultados!",
+    "title": "ENTRE EM CONTATO",
+    "subtitle": "Vamos transformar suas ideias em realidade. Conte-nos sobre o seu projeto e descubra como podemos impulsionar seus resultados!",
+    "badge": "Estamos disponíveis • Resposta em até 24h",
     "form": {
-      "title": "Envie sua mensagem",
       "name": "Seu nome",
       "email": "Seu email",
+      "subject": "Assunto",
       "message": "Sua mensagem",
-      "submit": "Enviar Mensagem",
+      "send": "Enviar Mensagem",
       "privacy": "Seu contato é confidencial • Responderemos em até 24h"
     },
     "info": {
       "title": "Informações",
       "email": "Email",
       "phone": "Telefone",
-      "social": "Siga-nos"
+      "location": "Localização"
     },
-    "metrics": {
-      "support": "Suporte",
-      "security": "Segurança",
-      "projects": "Projetos"
+    "social": "Siga-nos"
+  },
+  "footer": {
+    "copyright": "© {{year}} Rafael Rocha. Todos os direitos reservados.",
+    "links": {
+      "privacy": "Política de Privacidade",
+      "terms": "Termos de Uso",
+      "contact": "Contato"
+    }
+  },
+  "chatbot": {
+    "title": "Assistente Virtual",
+    "greeting": "Olá! Bem-vindo ao meu assistente virtual. 👋",
+    "help": "Como posso ajudar você hoje?",
+    "options": {
+      "contact": "Contato",
+      "info": "Informações",
+      "services": "Serviços"
     },
-    "benefits": [
-      "Resposta rápida", 
-      "Orçamento detalhado", 
-      "Consultoria gratuita"
-    ]
+    "optionMessages": {
+      "contact": "Quero entrar em contato",
+      "info": "Me fale sobre você",
+      "services": "Quais serviços você oferece?"
+    },
+    "responses": {
+      "info": "Sou um desenvolvedor fullstack com experiência em React, Next.js, Node.js e outras tecnologias. Especializado em criar soluções web modernas e de alto desempenho.",
+      "services": "Ofereço serviços de desenvolvimento web, aplicativos mobile, chatbots, ecommerce e consultoria em tecnologia. Cada solução é personalizada para atender às necessidades específicas do cliente."
+    },
+    "startForm": "Ótimo! Vou precisar de algumas informações para melhor atendê-lo.",
+    "ask": {
+      "phone": "Qual é o seu telefone para contato?",
+      "name": "Qual é o seu nome?",
+      "email": "Qual é o seu email para contato?",
+      "contactType": "Você prefere falar diretamente comigo ou deixar uma mensagem detalhando seu problema?"
+    },
+    "validation": {
+      "phone": "Por favor, insira um telefone válido.",
+      "name": "Por favor, insira um nome válido.",
+      "email": "Por favor, insira um endereço de email válido.",
+      "contactType": "Por favor, escolha uma opção (falar diretamente ou deixar mensagem)."
+    },
+    "contactOptions": {
+      "direct": "Falar diretamente",
+      "message": "Deixar mensagem"
+    },
+    "success": {
+      "direct": "Obrigado! Entrarei em contato com você diretamente em breve pelo telefone fornecido.",
+      "message": "Obrigado! Sua solicitação foi registrada. Entrarei em contato em breve para discutirmos seu problema."
+    },
+    "error": "Desculpe, ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente mais tarde ou entre em contato por outro meio.",
+    "fallback": "Desculpe, não entendi sua pergunta. Como posso ajudar?",
+    "moreHelp": "Posso ajudar com mais alguma coisa?"
   }
 }

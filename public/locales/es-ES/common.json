@@ -1,0 +1,167 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "services": "Servicios",
+    "portfolio": "Portafolio",
+    "testimonials": "Testimonios",
+    "contact": "Contacto",
+    "requestQuote": "Solicitar Presupuesto"
+  },
+  "heroSection": {
+    "availability": "Disponible para nuevos proyectos",
+    "mainTitle": {
+      "first": "Rafael Rocha",
+      "second": "Desarrollador Web"
+    },
+    "subtitle": "Desarrollador Web Fullstack creando experiencias digitales únicas e impresionantes",
+    "metrics": {
+      "satisfaction": "Satisfacción",
+      "projects": "Proyectos",
+      "support": "Soporte"
+    },
+    "cta": {
+      "primary": "Ver Portafolio",
+      "secondary": "Saber más"
+    },
+    "techTitle": "TECNOLOGÍAS",
+    "scrollHint": "Desplázate hacia abajo",
+    "backgroundAlt": "Fondo abstracto",
+    "portfolioProjects": "Proyectos en Portafolio"
+  },
+  "servicesSection": {
+    "title": "Soluciones Que Generan Resultados",
+    "subtitle": "Convertimos inversión en crecimiento real y medible. Cada servicio está desarrollado con enfoque en ROI comprobado.",
+    "cta": {
+      "title": "Transforma tu inversión en resultados medibles",
+      "subtitle": "Consultoría inicial gratuita • Presupuesto en 24 horas • Garantía de satisfacción"
+    },
+    "services": [
+      {
+        "title": "Desarrollo Web",
+        "description": "Sitios web responsivos y aplicaciones web modernas con las mejores tecnologías del mercado."
+      },
+      {
+        "title": "Aplicaciones Móviles",
+        "description": "Apps nativas e híbridas para iOS y Android que proporcionan experiencias excepcionales a los usuarios."
+      },
+      {
+        "title": "ChatBots e IA",
+        "description": "Asistentes virtuales inteligentes y soluciones de IA para automatizar procesos y mejorar la atención al cliente."
+      },
+      {
+        "title": "E-commerce",
+        "description": "Tiendas online completas con gestión de productos, pagos integrados y experiencia de compra optimizada."
+      },
+      {
+        "title": "Diseño UI/UX",
+        "description": "Interfaces intuitivas y atractivas que proporcionan la mejor experiencia para tus usuarios."
+      },
+      {
+        "title": "Consultoría Tech",
+        "description": "Orientación especializada para ayudar a tu empresa a tomar las mejores decisiones tecnológicas."
+      }
+    ]
+  },
+  "portfolioSection": {
+    "title": "Proyectos Recientes",
+    "subtitle": "Mira algunos de los trabajos que he desarrollado para clientes satisfechos",
+    "featured": "DESTACADO",
+    "metrics": {
+      "performance": "Rendimiento",
+      "satisfaction": "Satisfacción",
+      "users": "Usuarios"
+    },
+    "cta": {
+      "explore": "Ver Ejemplo"
+    },
+    "categories": {
+      "all": "Todos",
+      "web": "Web",
+      "mobile": "Móvil",
+      "ai": "IA",
+      "ecommerce": "E-commerce"
+    },
+    "modal": {
+      "overview": "Descripción",
+      "examples": "Ejemplos",
+      "technologies": "Tecnologías",
+      "examplesCount": "{{count}} ejemplos disponibles",
+      "requestSimilar": "Solicitar Proyecto Similar"
+    }
+  },
+  "testimonialsSection": {
+    "title": "Qué dicen sobre mí",
+    "subtitle": "Testimonios de clientes que han transformado sus ideas en realidad"
+  },
+  "contactSection": {
+    "title": "CONTACTA CON NOSOTROS",
+    "subtitle": "Vamos a transformar tus ideas en realidad. Cuéntanos sobre tu proyecto y descubre cómo podemos impulsar tus resultados!",
+    "badge": "Estamos disponibles • Respuesta en 24h",
+    "form": {
+      "name": "Tu nombre",
+      "email": "Tu email",
+      "subject": "Asunto",
+      "message": "Tu mensaje",
+      "send": "Enviar Mensaje",
+      "privacy": "Tu contacto es confidencial • Responderemos en 24h"
+    },
+    "info": {
+      "title": "Información",
+      "email": "Email",
+      "phone": "Teléfono",
+      "location": "Ubicación"
+    },
+    "social": "Síguenos"
+  },
+  "footer": {
+    "copyright": "© {{year}} Rafael Rocha. Todos los derechos reservados.",
+    "links": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Uso",
+      "contact": "Contacto"
+    }
+  },
+  "chatbot": {
+    "title": "Asistente Virtual",
+    "greeting": "¡Hola! Bienvenido a mi asistente virtual. 👋",
+    "help": "¿Cómo puedo ayudarte hoy?",
+    "options": {
+      "contact": "Contacto",
+      "info": "Información",
+      "services": "Servicios"
+    },
+    "optionMessages": {
+      "contact": "Quiero contactar",
+      "info": "Háblame de ti",
+      "services": "¿Qué servicios ofreces?"
+    },
+    "responses": {
+      "info": "Soy un desarrollador fullstack con experiencia en React, Next.js, Node.js y otras tecnologías. Especializado en crear soluciones web modernas y de alto rendimiento.",
+      "services": "Ofrezco servicios de desarrollo web, aplicaciones móviles, chatbots, comercio electrónico y consultoría tecnológica. Cada solución está personalizada para satisfacer las necesidades específicas del cliente."
+    },
+    "startForm": "¡Genial! Necesitaré algunos datos para atenderte mejor.",
+    "ask": {
+      "phone": "¿Cuál es tu número de teléfono para contacto?",
+      "name": "¿Cuál es tu nombre?",
+      "email": "¿Cuál es tu correo electrónico para contacto?",
+      "contactType": "¿Prefieres hablar directamente conmigo o dejar un mensaje detallando tu problema?"
+    },
+    "validation": {
+      "phone": "Por favor, introduce un número de teléfono válido.",
+      "name": "Por favor, introduce un nombre válido.",
+      "email": "Por favor, introduce un correo electrónico válido.",
+      "contactType": "Por favor, elige una opción (hablar directamente o dejar mensaje)."
+    },
+    "contactOptions": {
+      "direct": "Hablar directamente",
+      "message": "Dejar mensaje"
+    },
+    "success": {
+      "direct": "¡Gracias! Me pondré en contacto directamente contigo pronto a través del número de teléfono proporcionado.",
+      "message": "¡Gracias! Tu solicitud ha sido registrada. Me pondré en contacto contigo pronto para discutir tu problema."
+    },
+    "error": "Lo siento, ha ocurrido un error al enviar tu mensaje. Por favor, inténtalo de nuevo más tarde o contáctame por otro medio.",
+    "fallback": "Lo siento, no entendí tu pregunta. ¿Cómo puedo ayudarte?",
+    "moreHelp": "¿Puedo ayudarte con algo más?"
+  }
+}

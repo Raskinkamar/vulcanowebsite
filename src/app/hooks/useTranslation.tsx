@@ -16,7 +16,7 @@ export function useTranslation() {
       try {
         const storedLocale = localStorage.getItem('locale') || 'pt-BR';
         setLocale(storedLocale);
-        const res = await fetch(`/locales/${storedLocale}/common.json`);
+        const res = await fetch(`/locales/${storedLocale}/common.json?v=${Date.now()}`);
         const data = await res.json();
         setTranslations(data);
       } catch (error) {
@@ -36,7 +36,7 @@ export function useTranslation() {
     try {
       localStorage.setItem('locale', newLocale);
       setLocale(newLocale);
-      const res = await fetch(`/locales/${newLocale}/common.json`);
+      const res = await fetch(`/locales/${newLocale}/common.json?v=${Date.now()}`);
       const data = await res.json();
       setTranslations(data);
       
@@ -48,23 +48,23 @@ export function useTranslation() {
   };
 
   // Função para obter uma tradução
-  const t = (key: string) => {
+  const t = (key: string): string => {
     // Suporta caminhos aninhados como "heroSection.title.first"
     const path = key.split('.');
-    let result = translations;
+    let result: any = translations;
     
     for (const part of path) {
       if (!result) return key;
       result = result[part];
     }
     
-    return result || key;
+    return (typeof result === 'string' ? result : key);
   };
 
   return {
     t,
     locale,
     changeLocale,
-    availableLocales: ['pt-BR', 'en-US']
+    availableLocales: ['pt-BR', 'en-US', 'es-ES']
   };
 }

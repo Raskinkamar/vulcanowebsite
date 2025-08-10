@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio - Rafael Rocha
 
-## Getting Started
+Website portfolio desenvolvido em Next.js, React, TypeScript e TailwindCSS.
 
-First, run the development server:
+## Funcionalidades
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Design responsivo e moderno
+- Animações com Framer Motion
+- Suporte a múltiplos idiomas (Português, Inglês e Espanhol)
+- Chatbot para contato direto
+- Seções de portfolio, serviços, depoimentos e contato
+- Integração com Amazon SES para envio de emails
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Como executar
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone o repositório
+2. Instale as dependências:
+   ```
+   npm install
+   ```
+3. Configure as variáveis de ambiente:
+   ```
+   # Crie um arquivo .env.local na raiz do projeto com:
+   
+   # AWS SES Credentials
+   AWS_ACCESS_KEY_ID=sua_access_key_aqui
+   AWS_SECRET_ACCESS_KEY=sua_secret_key_aqui
+   AWS_REGION=us-east-1
+   
+   # Email configuration
+   SENDER_EMAIL=seu-email-verificado-no-ses@example.com
+   RECIPIENT_EMAIL=seu-email-para-receber-mensagens@example.com
+   ```
+4. Execute o projeto em modo de desenvolvimento:
+   ```
+   npm run dev
+   ```
+5. Abra [http://localhost:3000](http://localhost:3000) no navegador
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configuração do Amazon SES
 
-## Learn More
+Para que o chatbot funcione corretamente enviando emails, você precisa:
 
-To learn more about Next.js, take a look at the following resources:
+1. Ter uma conta na AWS com acesso ao serviço SES
+2. Verificar seu domínio ou pelo menos um email no SES
+3. Criar uma IAM key com permissões para o SES
+4. Configurar as variáveis de ambiente conforme acima
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Estrutura de arquivos principais
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/src/app` - Componentes e páginas principais
+- `/src/app/components` - Componentes reutilizáveis
+- `/src/app/hooks` - Custom hooks incluindo useTranslation
+- `/public/locales` - Arquivos de tradução em JSON
+- `/src/app/api` - Endpoints da API
 
-## Deploy on Vercel
+## Licença
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este projeto é licenciado sob a licença MIT.

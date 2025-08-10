@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
+import { useTranslation } from "../hooks/useTranslation"
 
 // Card de projeto limpo
 const CleanProjectCard: React.FC<{
@@ -18,6 +19,7 @@ const CleanProjectCard: React.FC<{
   index: number
   onSelect: (project: Project) => void
 }> = ({ project, index, onSelect }) => {
+  const { t } = useTranslation()
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 })
 
   const getCategoryIcon = () => {
@@ -61,7 +63,7 @@ const CleanProjectCard: React.FC<{
         {project.featured && (
           <Badge className="absolute top-4 right-4 z-10 bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
             <Star className="w-3 h-3" />
-            FEATURED
+            {t('portfolioSection.featured')}
           </Badge>
         )}
         {/* Header */}
@@ -83,19 +85,19 @@ const CleanProjectCard: React.FC<{
           {/* Metrics */}
           {project.metrics && (
             <div className="grid grid-cols-3 gap-3 py-3 border-t border-b border-zinc-800">
-              <div className="text-center">
-                <div className="text-xl font-bold text-red-500">{project.metrics.performance}%</div>
-                <div className="text-xs text-gray-500">Performance</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl font-bold text-red-500">{project.metrics.satisfaction}%</div>
-                <div className="text-xs text-gray-500">Satisfação</div>
-              </div>
-              <div className="text-center">
-                <div className="text-xl font-bold text-red-500">
-                  {project.metrics.users || `${project.examples.length}k`}
+                              <div className="text-center">
+                  <div className="text-xl font-bold text-red-500">{project.metrics.performance}%</div>
+                  <div className="text-xs text-gray-500">{t('portfolioSection.metrics.performance')}</div>
                 </div>
-                <div className="text-xs text-gray-500">Usuários</div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-red-500">{project.metrics.satisfaction}%</div>
+                  <div className="text-xs text-gray-500">{t('portfolioSection.metrics.satisfaction')}</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xl font-bold text-red-500">
+                    {project.metrics.users || `${project.examples.length}k`}
+                  </div>
+                  <div className="text-xs text-gray-500">{t('portfolioSection.metrics.users')}</div>
               </div>
             </div>
           )}
@@ -103,7 +105,7 @@ const CleanProjectCard: React.FC<{
           <div className="flex flex-wrap gap-2">
             {project.tech.slice(0, 4).map((tech) => (
               <Badge
-                key={tech}
+                key={tech} 
                 variant="secondary"
                 className="px-3 py-1 text-xs bg-zinc-800 text-white/80 border border-zinc-700"
               >
@@ -120,15 +122,15 @@ const CleanProjectCard: React.FC<{
           <div className="flex items-center justify-between pt-2 border-t border-zinc-800">
             <div className="flex items-center gap-2 text-white/60 text-sm">
               <Users className="w-4 h-4" />
-              <span>{project.examples.length} exemplos</span>
+              <span>{project.examples.length} {t('portfolioSection.cta.examples') as string}</span>
             </div>
             <div className="flex items-center gap-1 text-red-500 text-sm font-medium group-hover:text-red-400 transition-colors">
-              <span>Explorar</span>
+              <span>{t('portfolioSection.cta.explore') as string}</span>
               <ArrowUpRight className="w-4 h-4" />
             </div>
           </div>
         </div>
-      </div>
+        </div>
     </motion.div>
   )
 }
@@ -138,6 +140,7 @@ const CleanProjectModal: React.FC<{
   project: Project
   onClose: () => void
 }> = ({ project, onClose }) => {
+  const { t } = useTranslation()
   const [activeTab, setActiveTab] = useState<"overview" | "examples" | "tech">("overview")
 
   const getCategoryIcon = () => {
@@ -158,6 +161,11 @@ const CleanProjectModal: React.FC<{
   return (
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="max-w-6xl w-full bg-zinc-950 border border-zinc-800 text-white p-0 overflow-hidden">
+        <Tabs
+          defaultValue="overview"
+          onValueChange={(value) => setActiveTab(value as "overview" | "examples" | "tech")}
+          className="mt-0"
+        >
         <DialogHeader className="p-6 border-b border-zinc-800">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -168,7 +176,7 @@ const CleanProjectModal: React.FC<{
                 <DialogTitle className="text-3xl font-bold text-white">{project.title}</DialogTitle>
                 <p className="text-white/60">{project.category}</p>
               </div>
-            </div>
+      </div>
             <Button
               variant="ghost"
               size="icon"
@@ -180,33 +188,27 @@ const CleanProjectModal: React.FC<{
             </Button>
           </div>
           {/* Tabs */}
-          <Tabs
-            defaultValue="overview"
-            onValueChange={(value) => setActiveTab(value as "overview" | "examples" | "tech")}
-            className="mt-6"
-          >
             <TabsList className="grid w-full grid-cols-3 bg-zinc-800 p-1 rounded-lg">
               <TabsTrigger
                 value="overview"
                 className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-white/70 hover:text-white"
               >
-                Visão Geral
+                {t('portfolioSection.modal.overview') as string}
               </TabsTrigger>
               <TabsTrigger
                 value="examples"
                 className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-white/70 hover:text-white"
               >
-                Exemplos
+                {t('portfolioSection.modal.examples') as string}
               </TabsTrigger>
               <TabsTrigger
                 value="tech"
                 className="data-[state=active]:bg-red-600 data-[state=active]:text-white text-white/70 hover:text-white"
               >
-                Tecnologias
+                {t('portfolioSection.modal.tech') as string}
               </TabsTrigger>
             </TabsList>
-          </Tabs>
-        </DialogHeader>
+          </DialogHeader>
 
         {/* Content */}
         <div className="p-6 max-h-[calc(90vh-200px)] overflow-y-auto">
@@ -229,8 +231,8 @@ const CleanProjectModal: React.FC<{
                       <div className="text-white/60 capitalize">{key}</div>
                     </div>
                   ))}
-                </div>
-              )}
+            </div>
+          )}
             </motion.div>
           </TabsContent>
           <TabsContent value="examples" className="mt-0">
@@ -259,12 +261,12 @@ const CleanProjectModal: React.FC<{
                     {example.liveUrl && (
                       <Button variant="link" className="mt-2 p-0 h-auto text-red-500 hover:text-red-400" asChild>
                         <a href={example.liveUrl} target="_blank" rel="noopener noreferrer">
-                          Ver ao vivo <ArrowUpRight className="ml-1 w-4 h-4" />
+                          {t('portfolioSection.cta.explore') as string} <ArrowUpRight className="ml-1 w-4 h-4" />
                         </a>
                       </Button>
                     )}
                   </div>
-                </div>
+        </div>
               ))}
             </motion.div>
           </TabsContent>
@@ -283,11 +285,12 @@ const CleanProjectModal: React.FC<{
               ))}
             </motion.div>
           </TabsContent>
-        </div>
+      </div>
+      </Tabs>
 
         <DialogFooter className="p-6 border-t border-zinc-800">
           <Button className="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-bold transition-colors">
-            Solicitar Projeto Similar
+            {t('portfolioSection.modal.requestSimilar') as string}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -295,4 +298,48 @@ const CleanProjectModal: React.FC<{
   )
 }
 
+// Main Portfolio component
+const Portfolio: React.FC<{ projects: Project[] }> = ({ projects }) => {
+  const { t } = useTranslation()
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
+
+  return (
+    <section className="relative py-20 px-4 lg:py-24 min-h-screen">
+      <div className="max-w-7xl mx-auto">
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <h2 className="text-5xl md:text-6xl font-black mb-6">
+            <span className="text-white">{t('portfolioSection.title').split(' ')[0]}</span>{" "}
+            <span className="text-red-500">{t('portfolioSection.title').split(' ')[1]}</span>
+          </h2>
+          <p className="text-white/70 text-xl max-w-3xl mx-auto">
+            {t('portfolioSection.subtitle')}
+          </p>
+        </div>
+
+        {/* Projects grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {projects.map((project, index) => (
+            <CleanProjectCard
+              key={project.title}
+              project={project}
+              index={index}
+              onSelect={setSelectedProject}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Project modal */}
+      {selectedProject && (
+        <CleanProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
+    </section>
+  )
+}
+
 export { CleanProjectCard, CleanProjectModal }
+export default Portfolio

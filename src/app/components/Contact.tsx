@@ -16,12 +16,14 @@ import {
   Clock,
   Award,
 } from "lucide-react"
+import { useTranslation } from "../hooks/useTranslation"
 
 // Componentes de fundo e transição
 import UnifiedBackground from './UnifiedBackground';
 import SectionDivider from './SectionDivider';
 
 export default function Contact() {
+  const { t } = useTranslation();
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [message, setMessage] = useState("")
@@ -56,20 +58,18 @@ export default function Contact() {
             whileHover={{ scale: 1.05 }}
           >
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-            <span className="text-white/80 font-medium text-sm">Estamos disponíveis • Resposta em até 24h</span>
+            <span className="text-white/80 font-medium text-sm">{t('contactSection.badge')}</span>
           </motion.div>
 
           {/* Título */}
           <h2 className="text-5xl sm:text-6xl md:text-7xl font-black mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">ENTRE EM</span>
+            <span className="bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">{t('contactSection.title').split(' ')[0]}</span>
             <br />
-            <span className="text-white">CONTATO</span>
+            <span className="text-white">{t('contactSection.title').split(' ')[1]}</span>
           </h2>
 
           <p className="text-xl text-white/70 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Vamos transformar suas <span className="text-white font-semibold">ideias em realidade</span>. Conte-nos
-            sobre o seu projeto e descubra como podemos{" "}
-            <span className="text-red-400 font-semibold">impulsionar seus resultados</span>!
+            {t('contactSection.subtitle')}
           </p>
 
           {/* Métricas */}
@@ -139,7 +139,7 @@ export default function Contact() {
                 </div>
                 <input
                   type="text"
-                  placeholder="Seu nome"
+                  placeholder={t('contactSection.form.name')}
                   className="w-full p-4 pl-16 rounded-lg bg-white/5 backdrop-blur-sm placeholder-gray-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500/50 transition-all text-white"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -153,7 +153,7 @@ export default function Contact() {
                 </div>
                 <input
                   type="email"
-                  placeholder="Seu email"
+                  placeholder={t('contactSection.form.email')}
                   className="w-full p-4 pl-16 rounded-lg bg-white/5 backdrop-blur-sm placeholder-gray-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500/50 transition-all text-white"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -166,7 +166,7 @@ export default function Contact() {
                   <MessageSquare className="text-red-400" size={18} />
                 </div>
                 <textarea
-                  placeholder="Sua mensagem"
+                  placeholder={t('contactSection.form.message')}
                   rows={5}
                   className="w-full p-4 pt-4 pl-16 rounded-lg bg-white/5 backdrop-blur-sm placeholder-gray-400 border border-white/10 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500/50 transition-all text-white resize-none"
                   value={message}
@@ -183,14 +183,14 @@ export default function Contact() {
               whileTap={{ scale: 0.98 }}
               className="w-full px-8 py-4 bg-gradient-to-r from-red-500 to-red-700 rounded-lg text-white font-bold text-lg transition-all duration-300 shadow-lg flex items-center justify-center gap-2"
             >
-              <span>Enviar Mensagem</span>
+              <span>{t('contactSection.form.send')}</span>
               <Send className="w-5 h-5" />
             </motion.button>
 
             {/* Nota de privacidade */}
             <div className="flex items-center justify-center gap-2 text-xs text-gray-400 pt-4 border-t border-white/10">
               <Shield className="w-4 h-4 text-red-400" />
-              <span>Seu contato é confidencial • Responderemos em até 24h</span>
+              <span>{t('contactSection.form.privacy')}</span>
             </div>
           </motion.form>
 
@@ -205,7 +205,7 @@ export default function Contact() {
               {/* Header */}
               <div className="flex items-center mb-8">
                 <div className="w-1 h-6 bg-red-500 rounded-r mr-3" />
-                <h3 className="font-bold text-white text-xl">Informações</h3>
+                <h3 className="font-bold text-white text-xl">{t('contactSection.info.title')}</h3>
               </div>
 
               {/* Contatos */}
@@ -215,7 +215,7 @@ export default function Contact() {
                     <Mail size={20} className="text-red-400" />
                   </div>
                   <div>
-                    <h4 className="text-white font-semibold mb-1">Email</h4>
+                    <h4 className="text-white font-semibold mb-1">{t('contactSection.info.email')}</h4>
                     <p className="text-gray-400 text-sm">contato@vulcano.com</p>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export default function Contact() {
                     <Phone size={20} className="text-red-400" />
                   </div>
                   <div>
-                    <h4 className="text-white font-semibold mb-1">Telefone</h4>
+                    <h4 className="text-white font-semibold mb-1">{t('contactSection.info.phone')}</h4>
                     <p className="text-gray-400 text-sm">+55 (11) 9999-8888</p>
                   </div>
                 </div>
@@ -236,7 +236,7 @@ export default function Contact() {
             <div>
               <div className="flex items-center mb-6">
                 <div className="w-1 h-6 bg-red-500 rounded-r mr-3" />
-                <h3 className="font-bold text-white text-lg">Siga-nos</h3>
+                <h3 className="font-bold text-white text-lg">{t('contactSection.social')}</h3>
               </div>
 
               <div className="flex items-center gap-4">

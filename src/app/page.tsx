@@ -1,17 +1,23 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import HeroSection from "./components/HeroSection";
-import Services from "./components/Services";
-import Portfolio from "./components/Portfolio";
-import Testimonials from "./components/Testimonials";
-import Contact from "./components/Contact";
-import FloatingCTA from "./components/FloatingCTA";
+import { useState, useRef, useEffect, Suspense, lazy } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import GreekGodIcon from "./components/GreekGodIcons";
 import LoadingScreen from "./components/LoadingScreen";
-import Footer from "./components/Footer";
 import HalftoneWave from "./components/HalftoneWave";
+import LanguageSwitcher from "./components/LanguageSwitcher";
+import SectionLoader from "./components/SectionLoader";
+import { useTranslation } from "./hooks/useTranslation";
+
+// Lazy load components
+const HeroSection = lazy(() => import("./components/HeroSection"));
+const Services = lazy(() => import("./components/Services"));
+const Portfolio = lazy(() => import("./components/Portfolio"));
+const Testimonials = lazy(() => import("./components/Testimonials"));
+const Contact = lazy(() => import("./components/Contact"));
+const FloatingCTA = lazy(() => import("./components/FloatingCTA"));
+const Footer = lazy(() => import("./components/Footer"));
+const AIChat = lazy(() => import("./components/AIChat"));
 
 // Componentes
 
@@ -156,18 +162,30 @@ const testimonialsData = [
     role: "CEO",
     message: "Incrível trabalho, revolucionou nossa infraestrutura!",
     avatar: undefined,
+    rating: 5,
   },
   {
     name: "Maria Souza",
     role: "CTO",
     message: "Soluções escaláveis e design impecável.",
     avatar: undefined,
+    rating: 5,
+  },
+  {
+    name: "Super Recarga",
+    role: "Cliente",
+    message: "Excelente profissional, criou meu site várias vezes, fez plugins que me ajudaram bastante em momentos de alta demanda, trabalho até hoje e não tenho nada a reclamar!",
+    avatar: undefined,
+    rating: 5,
   },
 ];
 
 export default function Home() {
   // Estado para controlar a tela de loading
   const [loading, setLoading] = useState(true);
+  
+  // Hook de traduções
+  const { t } = useTranslation();
   
   // Referências para as seções para usar com a navegação
   const heroRef = useRef<HTMLDivElement>(null);
@@ -220,13 +238,14 @@ export default function Home() {
             <span className="text-red-500 font-bold ml-2 hidden sm:inline-block">Vulcano</span>
           </div>
           
-          {/* Import dinâmico para o Language Switcher */}
+          {/* Language Switcher */}
+          <LanguageSwitcher />
 
           {[
-            { label: "Início", ref: heroRef },
-            { label: "Serviços", ref: servicesRef },
-            { label: "Portfólio", ref: portfolioRef },
-            { label: "Contato", ref: contactRef }
+            { label: t('nav.home'), ref: heroRef },
+            { label: t('nav.services'), ref: servicesRef },
+            { label: t('nav.portfolio'), ref: portfolioRef },
+            { label: t('nav.contact'), ref: contactRef }
           ].map((item, index) => (
             <motion.button 
               key={item.label}
@@ -252,7 +271,7 @@ export default function Home() {
             whileTap={{ scale: 0.95 }}
             onClick={() => scrollToSection(contactRef)}
           >
-            <span className="hidden sm:inline-block">Solicitar</span> Orçamento
+            <span className="hidden sm:inline-block">{t('nav.requestQuote').split(' ')[0]}</span> {t('nav.requestQuote').split(' ')[1]}
           </motion.button>
         </motion.nav>
       </header>
@@ -261,35 +280,40 @@ export default function Home() {
       <main>
         {/* Hero Section */}
         <div id="hero" ref={heroRef}>
-          <HeroSection onViewPortfolio={() => scrollToSection(servicesRef)} />
+          <Suspense fallback={<SectionLoader height="h-screen" />}>
+            <HeroSection onViewPortfolio={() => scrollToSection(servicesRef)} />
+          </Suspense>
         </div>
         
-        {/* Halftone Wave effect between Hero and Services */}
+        {/* Divider wave (kept, but now complemented by global pulse) */}
         <div className="relative h-20 md:h-32">
           <HalftoneWave 
-            color="rgba(255, 61, 61, 0.5)" 
+            color="rgba(255, 61, 61, 0.35)" 
             className="top-0" 
-            amplitude={30}
-            frequency={0.015}
+            amplitude={26}
+            frequency={0.018}
           />
         </div>
         
         {/* Services Section */}
         <div id="services" ref={servicesRef}>
-          <Services />
+          <Suspense fallback={<SectionLoader />}>
+            <Services />
+          </Suspense>
         </div>
         
         {/* Portfolio Section */}
         <div id="portfolio" ref={portfolioRef}>
-          <Portfolio projects={projects} />
+          <Suspense fallback={<SectionLoader />}>
+            <Portfolio projects={projects} />
+          </Suspense>
         </div>
         
-        {/* Halftone Wave effect between Portfolio and Testimonials */}
         <div className="relative h-20 md:h-32">
           <HalftoneWave 
-            color="rgba(106, 137, 204, 0.6)" 
+            color="rgba(106, 137, 204, 0.45)" 
             className="top-0" 
-            amplitude={25}
+            amplitude={22}
             frequency={0.02}
             dotSize={2}
             speed={0.03}
@@ -298,22 +322,35 @@ export default function Home() {
         
         {/* Testimonials Section */}
         <div id="testimonials">
-          <Testimonials testimonials={testimonialsData} />
+          <Suspense fallback={<SectionLoader />}>
+            <Testimonials testimonials={testimonialsData} />
+          </Suspense>
         </div>
         
         {/* Contact Section */}
         <div id="contact" ref={contactRef}>
-          <Contact />
+          <Suspense fallback={<SectionLoader />}>
+            <Contact />
+          </Suspense>
         </div>
         
         {/* Footer */}
-        <Footer />
+        <Suspense fallback={<SectionLoader height="h-24" message="Carregando rodapé..." />}>
+          <Footer />
+        </Suspense>
       </main>
 
    
       
       {/* CTA Flutuante */}
-      <FloatingCTA />
+      <Suspense fallback={null}>
+        <FloatingCTA />
+      </Suspense>
+      
+      {/* AI Chat (Ollama) */}
+      <Suspense fallback={null}>
+        <AIChat />
+      </Suspense>
     </div>
   );
 }
