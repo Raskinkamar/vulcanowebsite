@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { buildSystemPrompt, formatContext, retrieve } from "@/src/lib/rag";
 
 export const runtime = "nodejs";
 
@@ -22,10 +23,21 @@ export async function POST(req: NextRequest) {
 
     const baseUrl = process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434";
 
+    // RAG: recuperar contexto da base de conhecimento com base na última pergunta do usuário
+    const lastUser = [...messages].reverse().find((m) => m.role === "user");
+    const contextChunks = lastUser ? await retrieve(lastUser.content, 4) : [];
+    const contextText = contextChunks.length ? formatContext(contextChunks) : "";
+    const system = buildSystemPrompt();
+
+    const augmentedMessages = [
+      { role: "system", content: system + (contextText ? `\n\nContexto:\n${contextText}` : "") },
+      ...messages,
+    ];
+
     const res = await fetch(`${baseUrl}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ model, messages, stream: false }),
+      body: JSON.stringify({ model, messages: augmentedMessages, stream: false }),
     });
 
     if (!res.ok) {
