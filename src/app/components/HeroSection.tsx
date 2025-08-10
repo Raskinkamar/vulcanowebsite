@@ -227,7 +227,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           className="text-5xl sm:text-6xl md:text-8xl font-black mb-8 leading-tight"
         >
           <span className="block text-white mb-2">{t('heroSection.mainTitle.first') as string}</span>
-          <span className="block text-red-500">{t('heroSection.mainTitle.second') as string}</span>
+          <span className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">{t('heroSection.mainTitle.second') as string}</span>
         </motion.h1>
 
         {/* Subtítulo */}
@@ -260,15 +260,15 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
         </motion.div>
 
         {/* CTAs limpos */}
-        <motion.div
+          <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-16"
         >
           <motion.button
             onClick={onViewPortfolio}
-            className="px-10 py-4 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold text-lg transition-all duration-300"
+              className="px-10 py-4 bg-red-600 hover:bg-red-700 rounded-lg text-white font-semibold text-lg transition-all duration-300 shadow-md focus:outline-none focus:ring-2 focus:ring-red-500/60"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
@@ -288,7 +288,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
         </motion.div>
 
         {/* Technologies limpo */}
-        <motion.div
+          <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.8 }}
@@ -304,7 +304,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
         </motion.div>
 
         {/* Scroll indicator limpo */}
-        <motion.div
+          <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 0] }}
           transition={{ delay: 2, duration: 2, repeat: Number.POSITIVE_INFINITY }}

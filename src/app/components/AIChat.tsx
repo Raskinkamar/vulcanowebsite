@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Send, Bot, User, X } from "lucide-react";
+import { useTranslation } from "../hooks/useTranslation";
 
 interface Message {
   role: "user" | "assistant";
@@ -9,21 +10,43 @@ interface Message {
 }
 
 export default function AIChat() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Olá! Sou a IA da Vulcano. Pergunte sobre tecnologias, projetos e orçamentos." },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    // primeira mensagem de boas-vindas conforme idioma
+    if (messages.length === 0) {
+      setMessages([{ role: "assistant", content: `${t('chatbot.greeting')} ${t('chatbot.help')}` }]);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [t]);
 
   useEffect(() => {
     containerRef.current?.scrollTo({ top: containerRef.current.scrollHeight, behavior: "smooth" });
+    if (open) {
+      // foco no input ao abrir
+      inputRef.current?.focus();
+    }
   }, [messages, open]);
 
-  const send = async () => {
-    if (!input.trim() || loading) return;
-    const userMsg: Message = { role: "user", content: input.trim() };
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!open) return;
+      if (e.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [open]);
+
+  const send = async (override?: string) => {
+    const text = (override ?? input).trim();
+    if (!text || loading) return;
+    const userMsg: Message = { role: "user", content: text };
     setMessages((m) => [...m, userMsg]);
     setInput("");
     setLoading(true);
@@ -41,10 +64,10 @@ export default function AIChat() {
         }),
       });
       const data = await res.json();
-      const content: string = data?.message?.content || data?.response || "(sem resposta)";
+      const content: string = data?.message?.content || data?.response || t('chatbot.fallback');
       setMessages((m) => [...m, { role: "assistant", content }]);
     } catch (e: any) {
-      setMessages((m) => [...m, { role: "assistant", content: "Erro ao consultar a IA." }]);
+      setMessages((m) => [...m, { role: "assistant", content: t('chatbot.error') as string }]);
     } finally {
       setLoading(false);
     }
@@ -77,7 +100,7 @@ export default function AIChat() {
           </div>
 
           {/* Mensagens */}
-          <div ref={containerRef} className="flex-1 overflow-y-auto space-y-3 pr-1">
+          <div ref={containerRef} className="flex-1 overflow-y-auto space-y-3 pr-1" aria-live="polite">
             {messages.map((m, i) => (
               <div key={i} className={`flex gap-2 ${m.role === "user" ? "justify-end" : "justify-start"}`}>
                 <div className={`flex items-start gap-2 max-w-[85%] ${m.role === "user" ? "flex-row-reverse" : ""}`}>
@@ -91,20 +114,53 @@ export default function AIChat() {
               </div>
             ))}
             {loading && (
-              <div className="text-white/60 text-sm">Gerando resposta...</div>
+              <div className="flex gap-2 justify-start">
+                <div className="mt-0.5 rounded-full p-1 bg-white/10">
+                  <Bot className="w-4 h-4 text-white" />
+                </div>
+                <div className="rounded-lg p-3 text-sm bg-white/5 text-white flex items-center gap-1">
+                  <span className="inline-block w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce [animation-delay:0ms]"></span>
+                  <span className="inline-block w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce [animation-delay:150ms]"></span>
+                  <span className="inline-block w-1.5 h-1.5 bg-white/60 rounded-full animate-bounce [animation-delay:300ms]"></span>
+                </div>
+              </div>
             )}
+          </div>
+
+          {/* Sugestões rápidas */}
+          <div className="mt-2 flex flex-wrap gap-2">
+            {[
+              { k: 'services', v: t('chatbot.options.services') },
+              { k: 'info', v: t('chatbot.options.info') },
+              { k: 'contact', v: t('chatbot.options.contact') },
+            ].map((opt) => (
+              <button
+                key={opt.k}
+                onClick={() => send(t(`chatbot.optionMessages.${opt.k}`) as string)}
+                className="px-3 py-1.5 text-xs rounded-full bg-white/5 border border-white/10 text-white/80 hover:text-white hover:border-red-500/50 hover:bg-red-500/10 transition-colors"
+              >
+                {opt.v as string}
+              </button>
+            ))}
           </div>
 
           {/* Input */}
           <div className="mt-2 flex gap-2">
             <input
+              ref={inputRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && send()}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  send();
+                }
+              }}
               className="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white outline-none focus:ring-2 focus:ring-red-600"
-              placeholder="Pergunte sobre projetos, tecnologias e orçamentos..."
+              placeholder={t('chatbot.help') as string}
+              aria-label={t('chatbot.title') as string}
             />
-            <button onClick={send} disabled={loading} className="bg-red-600 hover:bg-red-700 text-white px-3 rounded-lg">
+            <button onClick={() => send()} disabled={loading} className="bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white px-3 rounded-lg" aria-label="Enviar mensagem">
               <Send className="w-4 h-4" />
             </button>
           </div>
