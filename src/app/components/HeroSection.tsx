@@ -189,21 +189,40 @@ const TechCarousel: React.FC = () => {
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-black to-transparent z-10" />
 
       <div
-        className="overflow-hidden px-4 sm:px-6"
+        className="relative overflow-hidden px-4 sm:px-6 h-24"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
+        {/* Track A - diagonal para cima/esquerda */}
         <motion.div
-          className="flex gap-4 will-change-transform"
-          style={{ rotate: '-6deg' }}
-          animate={reduced || paused ? { x: 0 } : { x: ['0%', '-50%'] }}
-          transition={reduced || paused ? { duration: 0 } : { duration: 18, ease: 'linear', repeat: Number.POSITIVE_INFINITY }}
+          className="absolute top-1/2 -translate-y-1/2 flex gap-4 will-change-transform"
+          animate={reduced || paused ? { x: 0, y: 0 } : { x: ['0%', '-50%'], y: ['0rem', '-1.2rem'] }}
+          transition={reduced || paused ? { duration: 0 } : { duration: 16, ease: 'linear', repeat: Number.POSITIVE_INFINITY }}
         >
           {items.map((tech, i) => (
-            <div key={`${tech.name}-${i}`} className="flex-shrink-0">
+            <div key={`a-${tech.name}-${i}`} className="flex-shrink-0" style={{ rotate: '-8deg' }}>
               <div className="relative w-44 h-16 rounded-xl border border-white/10 bg-black/40">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 to-transparent" />
-                <div className="relative h-full w-full flex items-center gap-3 px-4" style={{ rotate: '6deg' }}>
+                <div className="relative h-full w-full flex items-center gap-3 px-4" style={{ rotate: '8deg' }}>
+                  <div className="w-5 h-5 text-white/80 flex items-center justify-center">{tech.icon}</div>
+                  <div className="text-white/90 font-medium text-sm">{tech.name}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Track B - diagonal para cima/direita */}
+        <motion.div
+          className="absolute top-[60%] -translate-y-1/2 flex gap-4 will-change-transform"
+          animate={reduced || paused ? { x: 0, y: 0 } : { x: ['-25%', '0%'], y: ['1rem', '-0.2rem'] }}
+          transition={reduced || paused ? { duration: 0 } : { duration: 22, ease: 'linear', repeat: Number.POSITIVE_INFINITY }}
+        >
+          {items.map((tech, i) => (
+            <div key={`b-${tech.name}-${i}`} className="flex-shrink-0" style={{ rotate: '-8deg' }}>
+              <div className="relative w-44 h-16 rounded-xl border border-white/10 bg-black/40">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/5 to-transparent" />
+                <div className="relative h-full w-full flex items-center gap-3 px-4" style={{ rotate: '8deg' }}>
                   <div className="w-5 h-5 text-white/80 flex items-center justify-center">{tech.icon}</div>
                   <div className="text-white/90 font-medium text-sm">{tech.name}</div>
                 </div>
