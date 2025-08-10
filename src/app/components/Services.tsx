@@ -243,20 +243,20 @@ const AdvancedServices: React.FC = () => {
             <span className="text-white/80 font-medium text-sm">{t('servicesSection.title')}</span>
           </div>
 
-          <h2 className="text-5xl md:text-6xl font-black mb-6">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 px-2 sm:px-0">
             <span className="text-white">{t('servicesSection.title').split(' ')[0]}</span>{' '}
             <span className="text-red-500">{t('servicesSection.title').split(' ').slice(1).join(' ')}</span>
           </h2>
 
-          <p className="text-xl text-white/70 max-w-4xl mx-auto">
+          <p className="text-base sm:text-xl text-white/70 max-w-4xl mx-auto px-2 sm:px-0">
             {t('servicesSection.subtitle')}
           </p>
         </motion.div>
 
         {/* Services: grid on desktop, horizontal snap carousel on mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 md:overflow-visible overflow-x-auto snap-x snap-mandatory [-webkit-overflow-scrolling:touch] px-1 md:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 md:overflow-visible overflow-x-auto snap-x snap-mandatory [-webkit-overflow-scrolling:touch] px-2 md:px-0 scrollbar-hide">
           {services.map((service, index) => (
-            <div key={service.id} className="md:contents flex-shrink-0 w-[85%] sm:w-[60%] snap-center md:w-auto">
+            <div key={service.id} className="md:contents flex-shrink-0 w-[85vw] sm:w-[60vw] snap-center md:w-auto">
               <ServiceCard
               key={service.id}
               service={service}

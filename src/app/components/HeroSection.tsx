@@ -234,7 +234,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-5xl sm:text-6xl md:text-8xl font-black mb-8 leading-tight"
+          className="text-4xl sm:text-6xl md:text-8xl font-black mb-6 sm:mb-8 leading-tight px-4 sm:px-0"
         >
           <span className="block text-white mb-2">{t('heroSection.mainTitle.first') as string}</span>
           <span className="block bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">{t('heroSection.mainTitle.second') as string}</span>
@@ -245,7 +245,7 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="text-xl md:text-2xl text-white/70 max-w-4xl mx-auto mb-12 leading-relaxed"
+          className="text-base sm:text-xl md:text-2xl text-white/70 max-w-4xl mx-auto mb-8 sm:mb-12 leading-relaxed px-4 sm:px-0"
         >
           {t('heroSection.subtitle') as string}
         </motion.p>

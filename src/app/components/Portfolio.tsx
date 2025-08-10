@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { X, ArrowUpRight, Globe, Smartphone, Code2, Database, Cpu, Users, Star } from "lucide-react"
 import { useInView } from "react-intersection-observer"
-import type { Project } from "@/types"
+import type { Project } from "../src/types"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
@@ -103,7 +103,7 @@ const CleanProjectCard: React.FC<{
           )}
           {/* Tech stack */}
           <div className="flex flex-wrap gap-2">
-            {project.tech.slice(0, 4).map((tech) => (
+            {project.tech.slice(0, 4).map((tech: string) => (
               <Badge
                 key={tech} 
                 variant="secondary"
@@ -243,7 +243,7 @@ const CleanProjectModal: React.FC<{
               exit={{ opacity: 0, x: -20 }}
               className="grid grid-cols-1 md:grid-cols-2 gap-6"
             >
-              {project.examples.map((example) => (
+              {project.examples.map((example: { title: string; description: string; imageUrl: string; liveUrl?: string }) => (
                 <div key={example.title} className="bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800">
                   <div className="h-48 bg-zinc-800 relative">
                     <Image
@@ -278,7 +278,7 @@ const CleanProjectModal: React.FC<{
               exit={{ opacity: 0, x: -20 }}
               className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
             >
-              {project.tech.map((tech) => (
+              {project.tech.map((tech: string) => (
                 <div key={tech} className="p-4 bg-zinc-900 rounded-lg text-center border border-zinc-800">
                   <div className="text-white font-medium">{tech}</div>
                 </div>
@@ -317,15 +317,16 @@ const Portfolio: React.FC<{ projects: Project[] }> = ({ projects }) => {
           </p>
         </div>
 
-        {/* Projects grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        {/* Projects: grid on desktop, horizontal snap on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 md:overflow-visible overflow-x-auto snap-x snap-mandatory [-webkit-overflow-scrolling:touch] px-2 md:px-0 scrollbar-hide">
           {projects.map((project, index) => (
-            <CleanProjectCard
-              key={project.title}
-              project={project}
-              index={index}
-              onSelect={setSelectedProject}
-            />
+            <div key={project.title} className="md:contents flex-shrink-0 w-[85vw] sm:w-[60vw] snap-center md:w-auto">
+              <CleanProjectCard
+                project={project}
+                index={index}
+                onSelect={setSelectedProject}
+              />
+            </div>
           ))}
         </div>
       </div>
