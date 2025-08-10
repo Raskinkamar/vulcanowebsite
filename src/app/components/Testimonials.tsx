@@ -177,7 +177,7 @@ const AdvancedTestimonials: React.FC<TestimonialsProps> = ({ testimonials }) => 
 
       {/* Background galaxy GIF com opacidade reduzida */}
       <div
-        className="absolute opacity-70 pointer-events-none right-0 top-0 w-full h-56 md:w-2/5 md:h-full bg-[url('/images/greek/spaces.gif')] bg-contain md:bg-cover bg-right md:bg-center bg-no-repeat z-[1]"
+        className="absolute pointer-events-none right-0 top-0 w-full h-40 bg-none md:opacity-70 md:w-2/5 md:h-full md:bg-[url('/images/greek/spaces.gif')] md:bg-cover md:bg-right md:bg-no-repeat z-[1]"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">

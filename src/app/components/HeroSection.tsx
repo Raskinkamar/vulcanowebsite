@@ -17,6 +17,7 @@ import {
   SiVuedotjs,
   SiLaravel,
 } from "react-icons/si"
+import MobileGifShowcase from "./MobileGifShowcase"
 
 interface HeroSectionProps {
   onViewPortfolio: () => void
@@ -206,6 +207,15 @@ const AdvancedHeroSection: React.FC<HeroSectionProps> = ({ onViewPortfolio }) =>
       </motion.div>
 
 
+
+      {/* Showcase de GIFs no mobile */}
+      <MobileGifShowcase
+        gifs={[
+          { src: "/images/greek/planet2.gif", alt: "Planeta" },
+          { src: "/images/greek/hand.gif", alt: "Mão grega" },
+          { src: "/images/greek/galaxy.gif", alt: "Galáxia" },
+        ]}
+      />
 
       {/* Hero Content */}
       <div className="relative z-20 text-center px-6 max-w-6xl mx-auto">
